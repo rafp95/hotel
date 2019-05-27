@@ -18,7 +18,6 @@ namespace Hotel.DAO.HotelServiceImpl
             _backgroundWorker.RunWorkerAsync();
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
-
         }
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -34,12 +33,12 @@ namespace Hotel.DAO.HotelServiceImpl
             {
 
             } while (dateTime.AddSeconds(10) > DateTime.Now);
-            SendEmail("p.rafal123@gmail.com", "patrykrafal33@o2.pl", "Siema");
+            Task.Run( async() => await SendEmail("p.rafal123@gmail.com", "patrykrafal33@o2.pl", "fdfs"));
         }
 
-        public void SendEmail(string from, string to, string descr)
+        public async Task SendEmail(string from, string to, string descr)
         {
-            _sendEmailService.SendEmail(from, to, descr);
+            await _sendEmailService.SendEmail(from, to, descr);
         }
     }
 }

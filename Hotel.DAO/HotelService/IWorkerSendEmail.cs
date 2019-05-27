@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Hotel.DAO.HotelService
 {
     public interface IWorkerSendEmail
     {
-        void SendEmail(string from, string to, string descr);
+        Task SendEmail(string from, string to, string descr);
     }
 }

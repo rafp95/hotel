@@ -25,9 +25,9 @@ namespace HotelManagment.Controllers
         }
 
         // GET: Room
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(_romService.GetRooms());
+            return View(await _romService.GetRoomsAsync());
         }
 
         // GET: Room/Details/5
@@ -37,21 +37,21 @@ namespace HotelManagment.Controllers
         }
 
         // GET: Room/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            StatusRoom();
+            await StatusRoom();
             return View();
         }
 
         // POST: Room/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(include: "Amount,Capacity,Description,RoomNr,IDstat")] Room room)
+        public async Task<ActionResult> Create([Bind(include: "Amount,Capacity,Description,RoomNr,IDstat")] Room room)
         {
             try
             {
                 // TODO: Add insert logic here
-                _romService.AddRoom(room);
+                await _romService.AddRoomAsync(room);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -61,27 +61,27 @@ namespace HotelManagment.Controllers
         }
 
         // GET: Room/Edit/5
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
-            StatusRoom();
-            return View(_romService.FindOneRoom(id));
+            await StatusRoom();
+            return View(await _romService.FindOneRoomAsync(id));
         }
 
-        private dynamic StatusRoom()
+        private async Task<dynamic> StatusRoom()
         {
-            return ViewBag.Status = new SelectList(_roomStatusService.GetStatuses(), "IDstat", "Available");
+            return ViewBag.Status = new SelectList(await _roomStatusService.GetStatusesAsync(), "IDstat", "Available");
         }
 
         // POST: Room/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,IDstat")] Room room)
+        public async Task<ActionResult> Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,IDstat")] Room room)
         {
             try
             {
-                StatusRoom();
+                await StatusRoom();
                 // TODO: Add update logic here
-                _romService.UpdateRoom(room, id);
+                await _romService.UpdateRoomAsync(room, id);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -99,12 +99,12 @@ namespace HotelManagment.Controllers
         // POST: Room/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
                 // TODO: Add delete logic here
-                _romService.DeleteRoom(id);
+                await _romService.DeleteRoomAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

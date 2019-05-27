@@ -20,31 +20,31 @@ namespace Hotel.DAO.HotelService
             this._roomStatus = roomStatus;
         }
 
-        public void AddRoom(Room room)
+        public async Task AddRoomAsync(Room room)
         {
-            room.Status = _roomStatus.FindRoomStatus(room.IDstat);
-            _room.InsertOne(room);
+            room.Status = await _roomStatus.FindRoomStatusAsync(room.IDstat);
+            await _room.InsertOneAsync(room);
         }
 
-        public void DeleteRoom(string id)
+        public async Task DeleteRoomAsync(string id)
         {
-            _room.DeleteOne<Room>(_ => _.ID == id);
+            await _room.DeleteOneAsync(_ => _.ID == id);
         }
 
-        public Room FindOneRoom(string id)
+        public async Task<Room> FindOneRoomAsync(string id)
         {
-            return _room.Find(_ => _.ID == id).FirstOrDefault();
+            return await _room.Find(_ => _.ID == id).FirstOrDefaultAsync();
         }
 
-        public List<Room> GetRooms()
+        public async Task<IEnumerable<Room>> GetRoomsAsync()
         {
-            return _room.Find(_ => true).ToList();
+            return await _room.Find(_ => true).ToListAsync();
         }
 
-        public void UpdateRoom(Room room, string id)
+        public async Task UpdateRoomAsync(Room room, string id)
         {
-            room.Status = _roomStatus.FindRoomStatus(room.IDstat);
-            _room.FindOneAndReplace(_ => _.ID == id, room);
+            room.Status = await _roomStatus.FindRoomStatusAsync(room.IDstat);
+            await _room.FindOneAndReplaceAsync(_ => _.ID == id, room);
         }
     }
 }

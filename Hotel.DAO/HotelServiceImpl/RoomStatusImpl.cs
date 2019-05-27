@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Hotel.DAO.HotelServiceImpl
 {
@@ -17,14 +18,14 @@ namespace Hotel.DAO.HotelServiceImpl
             _conntection = connectionService.GetMongoCollection("RoomStatus");
         }
 
-        public RoomStatus FindRoomStatus(string id)
+        public async Task<RoomStatus> FindRoomStatusAsync(string id)
         {
-            return _conntection.Find(_ => _.IDstat == id).FirstOrDefault();
+            return await _conntection.Find(_ => _.IDstat == id).FirstOrDefaultAsync();
         }
 
-        public List<RoomStatus> GetStatuses()
+        public async Task<IEnumerable<RoomStatus>> GetStatusesAsync()
         {
-            return _conntection.Find(_ => true).ToList(); 
+            return await _conntection.Find(_ => true).ToListAsync(); 
         }
     }
 }

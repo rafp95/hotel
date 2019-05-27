@@ -8,10 +8,10 @@ namespace Hotel.DAO.HotelService
 {
     public interface IRomService
     {
-        List<Room> GetRooms();
-        Room FindOneRoom(string id);
-        void AddRoom(Room room);
-        void UpdateRoom(Room room, string id);
-        void DeleteRoom(string id);
+        Task<IEnumerable<Room>> GetRoomsAsync();
+        Task<Room> FindOneRoomAsync(string id);
+        Task AddRoomAsync(Room room);
+        Task UpdateRoomAsync(Room room, string id);
+        Task DeleteRoomAsync(string id);
     }
 }
