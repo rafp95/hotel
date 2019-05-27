@@ -1,0 +1,17 @@
+﻿@model Hotel.DAO.PublicModel.Room
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+
+<h3>Czy napewno chcesz skasować?</h3>
+<div>
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Wstecz</a>
+    </form>
+</div>
+
