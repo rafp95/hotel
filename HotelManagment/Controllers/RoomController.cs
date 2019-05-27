@@ -10,17 +10,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HotelManagment.Controllers
 {
-    public class RoomController : Controller
+    public class RoomController : BaseController
     {
         private readonly IRomService _romService;
         private readonly IRoomStatusService _roomStatusService;
 
         public RoomController(IRomService romService
-            , IRoomStatusService roomStatusService)
+            , IRoomStatusService roomStatusService
+            , IWorkerSendEmail workerSendEmail) : base(workerSendEmail)
         {
             _romService = romService;
             _roomStatusService = roomStatusService;
-            
+
         }
 
         // GET: Room

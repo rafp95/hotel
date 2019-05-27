@@ -36,10 +36,12 @@ namespace HotelManagment
             });
 
             #region services
-            services.AddScoped(typeof(IConnectionService<>), typeof(ConnectionServiceImpl<>));
-            services.AddScoped(typeof(IHotelInitialize), typeof(HoteInitializeSerivce));
-            services.AddScoped(typeof(IRomService), typeof(RomServiceImpl));
-            services.AddScoped(typeof(IRoomStatusService), typeof(RoomStatusImpl));
+            services.AddTransient(typeof(IConnectionService<>), typeof(ConnectionServiceImpl<>));
+            services.AddTransient(typeof(IHotelInitialize), typeof(HoteInitializeSerivce));
+            services.AddTransient(typeof(IRomService), typeof(RomServiceImpl));
+            services.AddTransient(typeof(IRoomStatusService), typeof(RoomStatusImpl));
+            services.AddTransient(typeof(ISendEmailService), typeof(SendEmailServiceImpl));
+            services.AddSingleton(typeof(IWorkerSendEmail), typeof(WorkerServiceImpl));
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -51,6 +53,7 @@ namespace HotelManagment
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {

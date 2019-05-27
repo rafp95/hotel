@@ -13,18 +13,20 @@ using Hotel.DAO.PublicModel;
 
 namespace HotelManagment.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IHotelInitialize _hotelInitialize;
         private readonly IRomService _roomService;
         private readonly IRoomStatusService _roomStatusService;
 
-        public HomeController(IHotelInitialize hotelInitialize, IRomService romService, IRoomStatusService roomStatusService)
+        public HomeController(IHotelInitialize hotelInitialize
+            , IRomService romService
+            , IRoomStatusService roomStatusService,
+            IWorkerSendEmail workerSendEmail) : base(workerSendEmail)
         {
             _hotelInitialize = hotelInitialize;
             _roomService = romService;
             _roomStatusService = roomStatusService;
-            
         }
 
         public IActionResult Index()
