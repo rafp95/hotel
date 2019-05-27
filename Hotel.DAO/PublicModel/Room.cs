@@ -34,8 +34,6 @@ namespace Hotel.DAO.PublicModel
         public int Capacity { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
-        public string IDstat { get; set; }
-
         [Display(Name = "Wolny")]
         [BsonElement("Status")]
         public RoomStatus Status { get; set; }

@@ -27,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.Capacity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.Status.Available)
             </th>
             <th></th>
         </tr>
@@ -54,8 +54,8 @@
                 @Html.DisplayFor(modelItem => item.Status.Available)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }, new { @class = "btn btn-primary btn-sm" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class ="btn btn-danger btn-sm"})
             </td>
         </tr>
 }

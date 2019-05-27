@@ -32,7 +32,7 @@ namespace HotelManagment.Controllers
         public IActionResult Index()
         {
             //TODO init data
-            //_hotelInitialize.InitRoomStatus();
+            // _hotelInitialize.InitRoomStatus();
             return View();
         }
 

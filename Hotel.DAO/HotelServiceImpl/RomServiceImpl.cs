@@ -22,7 +22,6 @@ namespace Hotel.DAO.HotelService
 
         public async Task AddRoomAsync(Room room)
         {
-            room.Status = await _roomStatus.FindRoomStatusAsync(room.IDstat);
             await _room.InsertOneAsync(room);
         }
 
@@ -43,7 +42,6 @@ namespace Hotel.DAO.HotelService
 
         public async Task UpdateRoomAsync(Room room, string id)
         {
-            room.Status = await _roomStatus.FindRoomStatusAsync(room.IDstat);
             await _room.FindOneAndReplaceAsync(_ => _.ID == id, room);
         }
     }

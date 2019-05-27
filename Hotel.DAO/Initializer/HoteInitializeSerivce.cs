@@ -21,13 +21,11 @@ namespace Hotel.DAO.Initializer
             {
                 new RoomStatus()
                 {
-                    Available = "Tak",
-                    IDstat = "T"
+                    Available = "Tak"
                 },
                 new RoomStatus()
                 {
-                    Available = "Nie",
-                    IDstat = "N"
+                    Available = "Nie"
                 }
             };
             _roomStatus.InsertMany(roomStatuses);
@@ -35,7 +33,7 @@ namespace Hotel.DAO.Initializer
 
         public RoomStatus RoomStatus(string status)
         {
-            return _roomStatus.Find(_ => _.IDstat == status).FirstOrDefault();
+            return _roomStatus.Find(_ => _.Available == status).FirstOrDefault();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace HotelManagment.Controllers
         // POST: Room/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(include: "Amount,Capacity,Description,RoomNr,IDstat")] Room room)
+        public async Task<ActionResult> Create([Bind(include: "Amount,Capacity,Description,RoomNr,Status")] Room room)
         {
             try
             {
@@ -69,13 +69,13 @@ namespace HotelManagment.Controllers
 
         private async Task<dynamic> StatusRoom()
         {
-            return ViewBag.Status = new SelectList(await _roomStatusService.GetStatusesAsync(), "IDstat", "Available");
+            return ViewBag.Status = new SelectList(await _roomStatusService.GetStatusesAsync(), "Available", "Available");
         }
 
         // POST: Room/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,IDstat")] Room room)
+        public async Task<ActionResult> Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,Status")] Room room)
         {
             try
             {

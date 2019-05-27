@@ -20,7 +20,7 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public async Task<RoomStatus> FindRoomStatusAsync(string id)
         {
-            return await _conntection.Find(_ => _.IDstat == id).FirstOrDefaultAsync();
+            return await _conntection.Find(_ => _.Available == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<RoomStatus>> GetStatusesAsync()
