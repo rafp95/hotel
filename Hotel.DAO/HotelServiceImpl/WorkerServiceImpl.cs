@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hotel.DAO.HotelServiceImpl
 {
-    public class WorkerServiceImpl : IWorkerSendEmail
+    public class WorkerServiceImpl : IWorkerSendEmailService
     {
         private BackgroundWorker _backgroundWorker = new BackgroundWorker();
         private ISendEmailService _sendEmailService;

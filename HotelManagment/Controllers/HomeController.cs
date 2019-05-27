@@ -22,7 +22,7 @@ namespace HotelManagment.Controllers
         public HomeController(IHotelInitialize hotelInitialize
             , IRomService romService
             , IRoomStatusService roomStatusService,
-            IWorkerSendEmail workerSendEmail) : base(workerSendEmail)
+            IWorkerSendEmailService workerSendEmail) : base(workerSendEmail)
         {
             _hotelInitialize = hotelInitialize;
             _roomService = romService;

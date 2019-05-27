@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Hotel.DAO.HotelServiceImpl
 {
-    public class RoomStatusImpl : IRoomStatusService
+    public class RoomStatusServiceImpl : IRoomStatusService
     {
         private readonly IMongoCollection<RoomStatus> _conntection;
 
-        public RoomStatusImpl(IConnectionService<RoomStatus> connectionService)
+        public RoomStatusServiceImpl(IConnectionService<RoomStatus> connectionService)
         {
             _conntection = connectionService.GetMongoCollection("RoomStatus");
         }

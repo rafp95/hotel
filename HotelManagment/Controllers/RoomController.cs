@@ -14,12 +14,12 @@ namespace HotelManagment.Controllers
     {
         private readonly IRomService _romService;
         private readonly IRoomStatusService _roomStatusService;
-        private readonly IRoomCateggory _roomCateggory;
+        private readonly IRoomCateggoryService _roomCateggory;
 
         public RoomController(IRomService romService
             , IRoomStatusService roomStatusService
-            , IWorkerSendEmail workerSendEmail
-            , IRoomCateggory roomCateggory) : base(workerSendEmail)
+            , IWorkerSendEmailService workerSendEmail
+            , IRoomCateggoryService roomCateggory) : base(workerSendEmail)
         {
             _romService = romService;
             _roomStatusService = roomStatusService;

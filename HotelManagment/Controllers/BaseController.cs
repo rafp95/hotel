@@ -11,9 +11,9 @@ namespace HotelManagment.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly IWorkerSendEmail _workerSendEmail;
+        private readonly IWorkerSendEmailService _workerSendEmail;
         protected readonly Logger logger = null;
-        public BaseController(IWorkerSendEmail workerSendEmail)
+        public BaseController(IWorkerSendEmailService workerSendEmail)
         {
             _workerSendEmail = workerSendEmail;
             this.logger = LogManager.GetLogger(this.GetType().Name);

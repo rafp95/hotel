@@ -39,10 +39,10 @@ namespace HotelManagment
             services.AddTransient(typeof(IConnectionService<>), typeof(ConnectionServiceImpl<>));
             services.AddTransient(typeof(IHotelInitialize), typeof(HoteInitializeSerivce));
             services.AddTransient(typeof(IRomService), typeof(RomServiceImpl));
-            services.AddTransient(typeof(IRoomStatusService), typeof(RoomStatusImpl));
+            services.AddTransient(typeof(IRoomStatusService), typeof(RoomStatusServiceImpl));
             services.AddTransient(typeof(ISendEmailService), typeof(SendEmailServiceImpl));
-            services.AddTransient(typeof(IRoomCateggory), typeof(RoomCategoryServiceImpl));
-            services.AddSingleton(typeof(IWorkerSendEmail), typeof(WorkerServiceImpl));
+            services.AddTransient(typeof(IRoomCateggoryService), typeof(RoomCategoryServiceImpl));
+            services.AddSingleton(typeof(IWorkerSendEmailService), typeof(WorkerServiceImpl));
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

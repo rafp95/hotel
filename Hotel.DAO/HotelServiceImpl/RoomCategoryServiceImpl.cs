@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hotel.DAO.HotelServiceImpl
 {
-    public class RoomCategoryServiceImpl : IRoomCateggory
+    public class RoomCategoryServiceImpl : IRoomCateggoryService
     {
         private readonly IMongoCollection<RoomCategory> _room;
 

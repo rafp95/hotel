@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hotel.DAO.HotelService
 {
-    public interface IWorkerSendEmail
+    public interface IWorkerSendEmailService
     {
         Task SendEmail(string from, string to, string descr);
     }
