@@ -29,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status.Available)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Category)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -54,8 +57,11 @@
                 @Html.DisplayFor(modelItem => item.Status.Available)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }, new { @class = "btn btn-primary btn-sm" }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class ="btn btn-danger btn-sm"})
+                @Html.DisplayFor(modelItem => item.Category.Category)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
             </td>
         </tr>
 }

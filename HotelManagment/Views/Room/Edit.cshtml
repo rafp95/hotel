@@ -52,6 +52,14 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.Category.Category, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.Category.Category, ViewBag.Cattegory as SelectList, "Kategoria pokoju", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Category.Category, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
 
     <div class="form-group">
         <div class="col-md-12">

@@ -14,13 +14,16 @@ namespace HotelManagment.Controllers
     {
         private readonly IRomService _romService;
         private readonly IRoomStatusService _roomStatusService;
+        private readonly IRoomCateggory _roomCateggory;
 
         public RoomController(IRomService romService
             , IRoomStatusService roomStatusService
-            , IWorkerSendEmail workerSendEmail) : base(workerSendEmail)
+            , IWorkerSendEmail workerSendEmail
+            , IRoomCateggory roomCateggory) : base(workerSendEmail)
         {
             _romService = romService;
             _roomStatusService = roomStatusService;
+            _roomCateggory = roomCateggory;
 
         }
 
@@ -40,13 +43,14 @@ namespace HotelManagment.Controllers
         public async Task<ActionResult> Create()
         {
             await StatusRoom();
+            await CattegoryRoom();
             return View();
         }
 
         // POST: Room/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(include: "Amount,Capacity,Description,RoomNr,Status")] Room room)
+        public async Task<ActionResult> Create([Bind(include: "Amount,Capacity,Description,RoomNr,Status,Category")] Room room)
         {
             try
             {
@@ -64,6 +68,7 @@ namespace HotelManagment.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             await StatusRoom();
+            await CattegoryRoom();
             return View(await _romService.FindOneRoomAsync(id));
         }
 
@@ -72,14 +77,20 @@ namespace HotelManagment.Controllers
             return ViewBag.Status = new SelectList(await _roomStatusService.GetStatusesAsync(), "Available", "Available");
         }
 
+        private async Task<dynamic> CattegoryRoom()
+        {
+            return ViewBag.Cattegory = new SelectList(await _roomCateggory.GetRoomCateggoriesAsync(), "Category", "Category");
+        }
+
         // POST: Room/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,Status")] Room room)
+        public async Task<ActionResult> Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,Status,Category")] Room room)
         {
             try
             {
                 await StatusRoom();
+                await CattegoryRoom();
                 // TODO: Add update logic here
                 await _romService.UpdateRoomAsync(room, id);
                 return RedirectToAction(nameof(Index));

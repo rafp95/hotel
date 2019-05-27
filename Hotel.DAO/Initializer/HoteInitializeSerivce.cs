@@ -11,9 +11,12 @@ namespace Hotel.DAO.Initializer
     public class HoteInitializeSerivce : IHotelInitialize
     {
         private readonly IMongoCollection<RoomStatus> _roomStatus;
-        public HoteInitializeSerivce(IConnectionService<RoomStatus> connectionService)
+        private readonly IMongoCollection<RoomCategory> _roomCategory;
+        public HoteInitializeSerivce(IConnectionService<RoomStatus> connectionService
+            , IConnectionService<RoomCategory> roomCategory)
         {
             _roomStatus = connectionService.GetMongoCollection("RoomStatus");
+            _roomCategory = roomCategory.GetMongoCollection("RoomCategory");
         }
         public void InitRoomStatus()
         {
@@ -29,6 +32,19 @@ namespace Hotel.DAO.Initializer
                 }
             };
             _roomStatus.InsertMany(roomStatuses);
+            List<RoomCategory> roomCategories = new List<RoomCategory>()
+            {
+                new RoomCategory()
+                {
+                    Category = "VIP"
+                },
+                new RoomCategory()
+                {
+                    Category ="Zwykły"
+                }
+            };
+
+            _roomCategory.InsertMany(roomCategories);
         }
 
         public RoomStatus RoomStatus(string status)

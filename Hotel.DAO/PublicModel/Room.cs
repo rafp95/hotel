@@ -37,6 +37,11 @@ namespace Hotel.DAO.PublicModel
         [Display(Name = "Wolny")]
         [BsonElement("Status")]
         public RoomStatus Status { get; set; }
+
+        [Required(ErrorMessage = "Pole jest wymagane")]
+        [Display(Name = "Kategoria pokoju")]
+        [BsonElement("Cattegory")]
+        public RoomCategory Category { get; set; }
     }
 
 }
