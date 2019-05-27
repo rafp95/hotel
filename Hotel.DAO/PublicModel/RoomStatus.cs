@@ -9,7 +9,7 @@ namespace Hotel.DAO.PublicModel
     public class RoomStatus
     {
         [BsonId]
-        public string ShortName { get; set; }
-        public string LongName { get; set; }
+        public string IDstat { get; set; }
+        public string Available { get; set; }
     }
 }

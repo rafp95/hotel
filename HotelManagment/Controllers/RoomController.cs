@@ -38,14 +38,14 @@ namespace HotelManagment.Controllers
         // GET: Room/Create
         public ActionResult Create()
         {
-            StatusRoomList();
+            StatusRoom();
             return View();
         }
 
         // POST: Room/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(include: "Amount,Capacity,Description,RoomNr,ShortName")] Room room)
+        public ActionResult Create([Bind(include: "Amount,Capacity,Description,RoomNr,IDstat")] Room room)
         {
             try
             {
@@ -62,22 +62,23 @@ namespace HotelManagment.Controllers
         // GET: Room/Edit/5
         public ActionResult Edit(string id)
         {
-            StatusRoomList();
+            StatusRoom();
             return View(_romService.FindOneRoom(id));
         }
 
-        private dynamic StatusRoomList()
+        private dynamic StatusRoom()
         {
-            return ViewBag.Status = new SelectList(_roomStatusService.GetStatuses(), "ShortName", "LongName");
+            return ViewBag.Status = new SelectList(_roomStatusService.GetStatuses(), "IDstat", "Available");
         }
 
         // POST: Room/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,ShortName")] Room room)
+        public ActionResult Edit(string id, [Bind(include: "ID,Amount,Capacity,Description,RoomNr,IDstat")] Room room)
         {
             try
             {
+                StatusRoom();
                 // TODO: Add update logic here
                 _romService.UpdateRoom(room, id);
                 return RedirectToAction(nameof(Index));

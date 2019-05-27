@@ -22,7 +22,7 @@ namespace Hotel.DAO.HotelService
 
         public void AddRoom(Room room)
         {
-            room.Status = _roomStatus.FindRoomStatus(room.ShortName);
+            room.Status = _roomStatus.FindRoomStatus(room.IDstat);
             _room.InsertOne(room);
         }
 
@@ -43,7 +43,7 @@ namespace Hotel.DAO.HotelService
 
         public void UpdateRoom(Room room, string id)
         {
-            room.Status = _roomStatus.FindRoomStatus(room.ShortName);
+            room.Status = _roomStatus.FindRoomStatus(room.IDstat);
             _room.FindOneAndReplace(_ => _.ID == id, room);
         }
     }

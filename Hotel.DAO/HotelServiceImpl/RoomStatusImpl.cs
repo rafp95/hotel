@@ -19,12 +19,12 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public RoomStatus FindRoomStatus(string id)
         {
-            return _conntection.Find(_ => _.ShortName == id).FirstOrDefault();
+            return _conntection.Find(_ => _.IDstat == id).FirstOrDefault();
         }
 
         public List<RoomStatus> GetStatuses()
         {
-            return _conntection.Find<RoomStatus>(_ => true).ToList(); 
+            return _conntection.Find(_ => true).ToList(); 
         }
     }
 }

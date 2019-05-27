@@ -24,10 +24,13 @@ namespace HotelManagment.Controllers
             _hotelInitialize = hotelInitialize;
             _roomService = romService;
             _roomStatusService = roomStatusService;
+            
         }
 
         public IActionResult Index()
         {
+            //TODO init data
+            //_hotelInitialize.InitRoomStatus();
             return View();
         }
 
