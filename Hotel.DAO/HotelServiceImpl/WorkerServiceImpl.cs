@@ -33,7 +33,7 @@ namespace Hotel.DAO.HotelServiceImpl
             {
 
             } while (dateTime.AddSeconds(10) > DateTime.Now);
-            Task.Run( async() => await SendEmail("p.rafal123@gmail.com", "patrykrafal33@o2.pl", "fdfs"));
+            //Task.Run( async() => await SendEmail("p.rafal123@gmail.com", "patrykrafal33@o2.pl", "fdfs"));
         }
 
         public async Task SendEmail(string from, string to, string descr)
