@@ -26,14 +26,24 @@ namespace Hotel.DAO.PublicModel
         public DateTime ToDate { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
-        [Display(Name = "Gość")]
-        [BsonElement("Gość")]
+        [Display(Name = "Gosc")]
+        [BsonElement("GoscID")]
         public string GuestID { get; set; }
+
+        [Required(ErrorMessage = "Pole jest wymagane")]
+        [Display(Name = "Gość")]
+        [BsonElement("Gosc")]
+        public Guest Guest { get; set; }
+
+        [Required(ErrorMessage = "Pole jest wymagane")]
+        [Display(Name = "Room")]
+        [BsonElement("PokojID")]
+        public string Room { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Room")]
         [BsonElement("Pokój")]
-        public string Room { get; set; }
+        public Room Rooms { get; set; }
 
 
     }

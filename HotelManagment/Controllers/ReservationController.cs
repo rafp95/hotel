@@ -10,19 +10,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HotelManagment.Controllers
 {
-    public class ReservationController : Controller
+    public class ReservationController : BaseController
     {
         private readonly IRomService _roomService;
+        private readonly IReservationService _reservationService;
 
-        public ReservationController(IRomService roomService)
+        public ReservationController(IRomService roomService
+            ,IReservationService reservationService
+            ,IWorkerSendEmailService workerSendEmailService) : base(workerSendEmailService)
         {
             _roomService = roomService;
+            _reservationService = reservationService;
         }
 
         // GET: Reservation
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            return View(await _reservationService.GetReservationsAsync());
         }
 
         // GET: Reservation/Details/5
@@ -50,7 +54,8 @@ namespace HotelManagment.Controllers
             {
                 SelectListItem selectListItem = new SelectListItem()
                 {
-                    Text = $"Opis = {item.Description} " +
+                    Text = 
+                    $"Opis = {item.Description} " +
                     $"Cena = {item.Amount} " +
                     $"VIP = {item.Category.Category} " +
                     $"Osób = {item.Capacity}",
