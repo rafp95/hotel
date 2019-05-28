@@ -2,18 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hotel.DAO.HotelService;
 using Hotel.DAO.PublicModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagment.Controllers
 {
-    public class GuestController : Controller
+    public class GuestController : BaseController
     {
-        // GET: Guest
-        public ActionResult Index()
+        private readonly IGuestService _guestService;
+
+        public GuestController(IGuestService guestService,
+            IWorkerSendEmailService workerSendEmailService): base(workerSendEmailService)
         {
-            return View();
+            _guestService = guestService;
+        }
+
+
+
+        // GET: Guest
+        public async Task<ActionResult> Index()
+        {
+
+            return View(await _guestService.GetQuestsAsync());
         }
 
         // GET: Guest/Details/5
@@ -31,12 +43,12 @@ namespace HotelManagment.Controllers
         // POST: Guest/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Guest guest)
+        public async Task<ActionResult> Create(Guest guest)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                await _guestService.AddQuestAsync(guest);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -43,6 +43,7 @@ namespace HotelManagment
             services.AddTransient(typeof(ISendEmailService), typeof(SendEmailServiceImpl));
             services.AddTransient(typeof(IRoomCateggoryService), typeof(RoomCategoryServiceImpl));
             services.AddSingleton(typeof(IWorkerSendEmailService), typeof(WorkerServiceImpl));
+            services.AddTransient(typeof(IGuestService), typeof(GuestServiceImpl));
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
