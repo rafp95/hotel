@@ -58,20 +58,20 @@ namespace HotelManagment.Controllers
         }
 
         // GET: Guest/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(string id)
         {
-            return View();
+            return View(await _guestService.FindOneGestAsync(id));
         }
 
         // POST: Guest/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(string id, Guest guest)
         {
             try
             {
                 // TODO: Add update logic here
-
+                await _guestService.UpdateQuest(guest, id);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -81,7 +81,7 @@ namespace HotelManagment.Controllers
         }
 
         // GET: Guest/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }
@@ -89,12 +89,12 @@ namespace HotelManagment.Controllers
         // POST: Guest/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                await _guestService.DeleteQuestAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

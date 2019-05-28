@@ -2,5 +2,13 @@
   {
     "outputFile": "wwwroot/css/Room.css",
     "inputFile": "wwwroot/css/Room.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/SharedStyles.css",
+    "inputFile": "wwwroot/css/SharedStyles.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "wwwroot/css/site.scss"
   }
 ]
