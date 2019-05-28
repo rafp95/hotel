@@ -4,4 +4,5 @@
 // Write your JavaScript code.
 $(function () {
     $('div.main-loader').fadeOut('slow');
+    $("alert").fadeIn();
 });

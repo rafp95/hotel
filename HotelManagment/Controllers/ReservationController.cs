@@ -80,6 +80,7 @@ namespace HotelManagment.Controllers
                 ViewBag.Room = selectListItems;
                 // TODO: Add insert logic here
                 if (string.IsNullOrEmpty(reservation.GuestID)){
+                    ViewBag.Error = $"Proszę wypełnić wszyskie pola";
                     return View();
                 }
 

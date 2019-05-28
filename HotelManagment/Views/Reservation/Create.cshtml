@@ -3,6 +3,13 @@
 <h4>Reservation</h4>
 <hr />
 
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        Proszę poprawnie wypełnić wszystkie pola
+    </div>
+}
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
