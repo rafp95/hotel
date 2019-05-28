@@ -26,11 +26,13 @@ namespace Hotel.DAO.PublicModel
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Email")]
         [BsonElement("Email")]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Numer telefonu")]
         [BsonElement("Phone")]
+        [Phone]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
