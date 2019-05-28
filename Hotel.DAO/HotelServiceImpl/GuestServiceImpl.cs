@@ -27,6 +27,11 @@ namespace Hotel.DAO.HotelServiceImpl
             await this._guest.DeleteOneAsync(_ => _.ID == id);
         }
 
+        public IEnumerable<Guest> FindGuestByCriteria(string criteria)
+        { 
+            return  _guest.Find(_ => _.Name.Contains(criteria)).ToList();
+        }
+
         public async Task<Guest> FindOneGestAsync(string id)
         {
             return await this._guest.Find(_ => _.ID == id).FirstOrDefaultAsync();

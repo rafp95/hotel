@@ -86,6 +86,14 @@ namespace HotelManagment.Controllers
             return View();
         }
 
+        public ActionResult Sugestions(string term)
+        {
+            var pom = _guestService.FindGuestByCriteria(term).Select(_ => new { label = $"{_.Name} {_.Surname} {_.Pesel}", ID = _.ID });
+            pom = pom.Count() <= 0 ? pom.DefaultIfEmpty().Select(_ => new { label = "Nic nie znaleziono", ID = "" }).Take(1)
+                : pom;
+            return Json(pom);
+        }
+
         // POST: Guest/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

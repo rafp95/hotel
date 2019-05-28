@@ -30,6 +30,11 @@ namespace Hotel.DAO.HotelService
             await _room.DeleteOneAsync(_ => _.ID == id);
         }
 
+        public async Task<IEnumerable<Room>> FindAvaiableRoomAsync()
+        {
+            return await _room.Find(_ => _.Status.Available == "Tak").ToListAsync();
+        }
+
         public async Task<Room> FindOneRoomAsync(string id)
         {
             return await _room.Find(_ => _.ID == id).FirstOrDefaultAsync();
