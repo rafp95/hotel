@@ -32,5 +32,10 @@ namespace Hotel.DAO.HotelServiceImpl
         {
             await _reservation.InsertOneAsync(reservation);
         }
+
+        public async Task<Reservation> UpdateReservationAsync(Reservation reservation, string id)
+        {
+            return await _reservation.FindOneAndReplaceAsync(_ => _.ID == id, reservation);
+        }
     }
 }

@@ -17,12 +17,14 @@ namespace Hotel.DAO.PublicModel
         [Display(Name = "Od")]
         [BsonElement("FromDate")]
         [BsonDateTimeOptions]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime FromDate { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Do")]
         [BsonElement("ToDate")]
         [BsonDateTimeOptions]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime ToDate { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]

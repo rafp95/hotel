@@ -136,12 +136,14 @@ namespace HotelManagment.Controllers
         // POST: Reservation/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(Reservation reservation,string id)
         {
             try
             {
+                List<SelectListItem> selectListItems = await RoomAvaiable();
+                ViewBag.Room = selectListItems;
                 // TODO: Add update logic here
-
+                await _reservationService.UpdateReservationAsync(reservation, id);
                 return RedirectToAction(nameof(Index));
             }
             catch

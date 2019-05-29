@@ -4,7 +4,7 @@
 // Write your JavaScript code.
 $(function () {
     //Date time picker
-  
+
     //End datetime picker
     $('div.main-loader').fadeOut('slow');
     $("alert").fadeIn();
