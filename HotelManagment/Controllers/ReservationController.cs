@@ -130,7 +130,8 @@ namespace HotelManagment.Controllers
         {
             List<SelectListItem> selectListItems = await RoomAvaiable();
             ViewBag.Room = selectListItems;
-            return View(await _reservationService.FindReservationByIdAsync(id));
+            var pom = await _reservationService.FindReservationByIdAsync(id);
+            return View(pom);
         }
 
         // POST: Reservation/Edit/5
@@ -143,6 +144,11 @@ namespace HotelManagment.Controllers
                 List<SelectListItem> selectListItems = await RoomAvaiable();
                 ViewBag.Room = selectListItems;
                 // TODO: Add update logic here
+                var pom = await _guestService.FindGuestByIdAsync(reservation.GuestID);
+                var pom2 = await _roomService.FindRoomByIdAsync(reservation.Room);
+                reservation.GuestID = pom.ID;
+                reservation.Guest = pom;
+                reservation.Rooms = pom2;
                 await _reservationService.UpdateReservationAsync(reservation, id);
                 return RedirectToAction(nameof(Index));
             }

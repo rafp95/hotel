@@ -37,10 +37,13 @@
                 @Html.DisplayFor(modelItem => item.ToDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GuestID)
+                @Html.DisplayFor(modelItem => item.Guest.Name)
+                @Html.DisplayFor(modelItem => item.Guest.Surname)
+                @Html.DisplayFor(modelItem => item.Guest.Pesel)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Room)
+                @Html.DisplayFor(modelItem => item.Rooms.RoomNr)
+                @Html.DisplayFor(modelItem => item.Rooms.Category)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
