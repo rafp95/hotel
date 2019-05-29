@@ -60,7 +60,7 @@ namespace HotelManagment.Controllers
         // GET: Guest/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
-            return View(await _guestService.FindOneGestAsync(id));
+            return View(await _guestService.FindGuestByIdAsync(id));
         }
 
         // POST: Guest/Edit/5
@@ -88,7 +88,7 @@ namespace HotelManagment.Controllers
 
         public ActionResult Sugestions(string term)
         {
-            var pom = _guestService.FindGuestByCriteria(term).Select(_ => new { label = $"{_.Name} {_.Surname} {_.Pesel}", ID = _.ID });
+            var pom = _guestService.FindGuestByName(term).Select(_ => new { label = $"{_.Name} {_.Surname} {_.Pesel}", ID = _.ID });
             pom = pom.Count() <= 0 ? pom.DefaultIfEmpty().Select(_ => new { label = "Nic nie znaleziono", ID = "" }).Take(1)
                 : pom;
             return Json(pom);

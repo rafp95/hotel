@@ -18,9 +18,19 @@ namespace Hotel.DAO.HotelServiceImpl
             this._reservation = reservation.GetMongoCollection("Reservation");
         }
 
+        public async Task<Reservation> FindReservationByIdAsync(string id)
+        {
+            return await _reservation.Find(_ => _.ID == id).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<Reservation>> GetReservationsAsync()
         {
             return await _reservation.Find(_ => true).ToListAsync();
+        }
+
+        public async Task SaveReservationAsync(Reservation reservation)
+        {
+            await _reservation.InsertOneAsync(reservation);
         }
     }
 }

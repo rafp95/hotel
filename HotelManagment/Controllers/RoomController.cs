@@ -69,7 +69,7 @@ namespace HotelManagment.Controllers
         {
             await StatusRoom();
             await CattegoryRoom();
-            return View(await _romService.FindOneRoomAsync(id));
+            return View(await _romService.FindRoomByIdAsync(id));
         }
 
         private async Task<dynamic> StatusRoom()

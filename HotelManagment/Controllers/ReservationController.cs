@@ -13,14 +13,17 @@ namespace HotelManagment.Controllers
     public class ReservationController : BaseController
     {
         private readonly IRomService _roomService;
+        private readonly IGuestService _guestService;
         private readonly IReservationService _reservationService;
 
         public ReservationController(IRomService roomService
-            ,IReservationService reservationService
-            ,IWorkerSendEmailService workerSendEmailService) : base(workerSendEmailService)
+            , IReservationService reservationService
+            , IWorkerSendEmailService workerSendEmailService
+            , IGuestService guestService) : base(workerSendEmailService)
         {
             _roomService = roomService;
             _reservationService = reservationService;
+            _guestService = guestService;
         }
 
         // GET: Reservation
@@ -54,16 +57,21 @@ namespace HotelManagment.Controllers
             {
                 SelectListItem selectListItem = new SelectListItem()
                 {
-                    Text = 
-                    $"Opis = {item.Description} " +
-                    $"Cena = {item.Amount} " +
-                    $"VIP = {item.Category.Category} " +
-                    $"Osób = {item.Capacity}",
-                    Value = item.ID,
-                    Selected =  string.IsNullOrEmpty(item.ID) ? true : false
+                    Text =
+                    $"Opis = {item.Description} | " +
+                    $"Cena = {item.Amount} | " +
+                    $"Kategoria = {item.Category.Category} | " +
+                    $"Ilość osób = {item.Capacity}",
+                    Value = item.ID
+                    //Selected =  string.IsNullOrEmpty(item.ID) ? true : false
                 };
                 selectListItems.Add(selectListItem);
 
+            }
+
+            if (selectListItems.Count() == 0)
+            {
+                selectListItems.Add(new SelectListItem() { Text = "Brak wolnych pokoji" });
             }
 
             return selectListItems;
@@ -79,9 +87,34 @@ namespace HotelManagment.Controllers
                 List<SelectListItem> selectListItems = await RoomAvaiable();
                 ViewBag.Room = selectListItems;
                 // TODO: Add insert logic here
-                if (string.IsNullOrEmpty(reservation.GuestID)){
-                    ViewBag.Error = $"Proszę wypełnić wszyskie pola";
+                if (string.IsNullOrEmpty(reservation.GuestID))
+                {
+                    ViewBag.Error = $"Nie znaleziono takiego gościa";
                     return View();
+                }
+                else if (string.IsNullOrEmpty(reservation.Room)
+                   || reservation.Room.IndexOf("Brak wolnych pokoji") > -1)
+                {
+                    ViewBag.Error = $"Brak wolnych pokoji";
+                    return View();
+                }
+                else
+                {
+                    string[] buf = reservation.GuestID.Split(' ');
+                    if (buf.Length < 3)
+                    {
+                        ViewBag.Error = $"Nie znaleziono takiego gościa";
+                        return View();
+                    }
+                    else
+                    {
+                        var pom = await _guestService.FindGuestByPeselAsync(buf[2]);
+                        var pom2 = await _roomService.FindRoomByIdAsync(reservation.Room);
+                        reservation.GuestID = pom.ID;
+                        reservation.Guest = pom;
+                        reservation.Rooms = pom2;
+                        await _reservationService.SaveReservationAsync(reservation);
+                    }
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -93,9 +126,11 @@ namespace HotelManagment.Controllers
         }
 
         // GET: Reservation/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(string id)
         {
-            return View();
+            List<SelectListItem> selectListItems = await RoomAvaiable();
+            ViewBag.Room = selectListItems;
+            return View(await _reservationService.FindReservationByIdAsync(id));
         }
 
         // POST: Reservation/Edit/5

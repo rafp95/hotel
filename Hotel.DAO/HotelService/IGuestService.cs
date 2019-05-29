@@ -12,8 +12,9 @@ namespace Hotel.DAO.HotelService
         Task <IEnumerable<Guest>> GetQuestsAsync();
         Task AddQuestAsync(Guest guest);
         Task DeleteQuestAsync(string id);
-        Task<Guest> FindOneGestAsync(string id);
+        Task<Guest> FindGuestByIdAsync(string id);
         Task UpdateQuest(Guest guest, string id);
-        IEnumerable<Guest> FindGuestByCriteria(string criteria);
+        IEnumerable<Guest> FindGuestByName(string criteria);
+        Task <Guest> FindGuestByPeselAsync(string pesel);
     }
 }

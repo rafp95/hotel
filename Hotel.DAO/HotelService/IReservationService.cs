@@ -9,5 +9,7 @@ namespace Hotel.DAO.HotelService
     public interface IReservationService
     {
         Task<IEnumerable<Reservation>> GetReservationsAsync();
+        Task SaveReservationAsync(Reservation reservation);
+        Task<Reservation> FindReservationByIdAsync(string id);
     }
 }
