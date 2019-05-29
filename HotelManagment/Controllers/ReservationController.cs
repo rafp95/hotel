@@ -97,6 +97,10 @@ namespace HotelManagment.Controllers
                 {
                     ViewBag.Error = $"Brak wolnych pokoji";
                     return View();
+                }else if(reservation.FromDate.ToUniversalTime() < DateTime.Now 
+                    || reservation.ToDate.ToUniversalTime() < DateTime.Now)
+                {
+                    ViewBag.Error = $"Błędne daty";
                 }
                 else
                 {
@@ -137,7 +141,7 @@ namespace HotelManagment.Controllers
         // POST: Reservation/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Reservation reservation,string id)
+        public async Task<ActionResult> Edit(Reservation reservation, string id)
         {
             try
             {
