@@ -14,7 +14,7 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public GuestServiceImpl(IConnectionService<Guest> guest)
         {
-            this._guest = guest.GetMongoCollection("Guest");
+            this._guest = guest.GetMongoCollection("Hotel.Guest");
         }
 
         public async Task AddQuestAsync(Guest guest)
@@ -50,6 +50,11 @@ namespace Hotel.DAO.HotelServiceImpl
         public async Task<Guest> FindGuestByPeselAsync(string pesel)
         {
             return await this._guest.Find(_ => _.Pesel == pesel).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> GuestExistByIdAsync(string id)
+        {
+            return await _guest.Find(_ => _.ID == id).AnyAsync();
         }
     }
 }

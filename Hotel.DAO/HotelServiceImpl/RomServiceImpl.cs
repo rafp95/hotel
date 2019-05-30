@@ -16,7 +16,7 @@ namespace Hotel.DAO.HotelService
         public RomServiceImpl(IConnectionService<Room> room,
             IRoomStatusService roomStatus)
         {
-            this._room = room.GetMongoCollection("Room");
+            this._room = room.GetMongoCollection("Hotel.Room");
             this._roomStatus = roomStatus;
         }
 

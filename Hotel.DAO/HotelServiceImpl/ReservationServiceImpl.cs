@@ -15,7 +15,7 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public ReservationServiceImpl(IConnectionService<Reservation> reservation)
         {
-            this._reservation = reservation.GetMongoCollection("Reservation");
+            this._reservation = reservation.GetMongoCollection("Hotel.Reservation");
         }
 
         public async Task<Reservation> FindReservationByIdAsync(string id)

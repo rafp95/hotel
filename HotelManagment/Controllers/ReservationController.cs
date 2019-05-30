@@ -15,15 +15,18 @@ namespace HotelManagment.Controllers
         private readonly IRomService _roomService;
         private readonly IGuestService _guestService;
         private readonly IReservationService _reservationService;
+        private readonly IValidatorService _validatorService;
 
         public ReservationController(IRomService roomService
             , IReservationService reservationService
             , IWorkerSendEmailService workerSendEmailService
-            , IGuestService guestService) : base(workerSendEmailService)
+            , IGuestService guestService
+            , IValidatorService validatorService) : base(workerSendEmailService)
         {
             _roomService = roomService;
             _reservationService = reservationService;
             _guestService = guestService;
+            _validatorService = validatorService;
         }
 
         // GET: Reservation
@@ -86,8 +89,12 @@ namespace HotelManagment.Controllers
             {
                 List<SelectListItem> selectListItems = await RoomAvaiable();
                 ViewBag.Room = selectListItems;
+                DateTime now = DateTime.Now;
                 // TODO: Add insert logic here
-                if (string.IsNullOrEmpty(reservation.GuestID))
+                string[] buf = reservation.GuestID.Split(' ');
+                var pesel = buf.Length >= 3 ? buf[2] : "";
+                var guest = await _guestService.FindGuestByPeselAsync(pesel);
+                if (guest == null)
                 {
                     ViewBag.Error = $"Nie znaleziono takiego gościa";
                     return View();
@@ -98,14 +105,14 @@ namespace HotelManagment.Controllers
                     ViewBag.Error = $"Brak wolnych pokoji";
                     return View();
                 }
-                else if (reservation.FromDate.ToUniversalTime() < DateTime.Now
-                   || reservation.ToDate.ToUniversalTime() < DateTime.Now)
+                else if (_validatorService.DateIsValid(reservation, now))
                 {
                     ViewBag.Error = $"Błędne daty";
+                    return View();
                 }
                 else
                 {
-                    string[] buf = reservation.GuestID.Split(' ');
+                    
                     if (buf.Length < 3)
                     {
                         ViewBag.Error = $"Nie znaleziono takiego gościa";
@@ -146,23 +153,37 @@ namespace HotelManagment.Controllers
         {
             try
             {
+
                 List<SelectListItem> selectListItems = await RoomAvaiable();
                 ViewBag.Room = selectListItems;
-                // TODO walidacja daty
-                // TODO: Add update logic here
-                var pom = await _guestService.FindGuestByIdAsync(reservation.GuestID);
-                var pom2 = await _roomService.FindRoomByIdAsync(reservation.Room);
-                reservation.GuestID = pom.ID;
-                reservation.Guest = pom;
-                reservation.Rooms = pom2;
-                await _reservationService.UpdateReservationAsync(reservation, id);
-                return RedirectToAction(nameof(Index));
+                DateTime now = DateTime.Now;
+                // TODO: Add insert logic here
+                if (_validatorService.DateIsValid(reservation, now))
+                {
+                    ViewBag.Error = $"Błędne daty";
+                    return View();
+                }
+                else
+                {
+
+                    var pom = await _guestService.FindGuestByIdAsync(reservation.GuestID);
+                    var pom2 = await _roomService.FindRoomByIdAsync(reservation.Room);
+                    reservation.GuestID = pom.ID;
+                    reservation.Guest = pom;
+                    reservation.Rooms = pom2;
+                    await _reservationService.UpdateReservationAsync(reservation, id);
+                }
             }
             catch
             {
                 return View();
             }
+
+            // TODO walidacja daty
+            // TODO: Add update logic here               
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: Reservation/Delete/5
         public ActionResult Delete(int id)

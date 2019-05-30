@@ -45,6 +45,7 @@ namespace HotelManagment
             services.AddSingleton(typeof(IWorkerSendEmailService), typeof(WorkerServiceImpl));
             services.AddTransient(typeof(IGuestService), typeof(GuestServiceImpl));
             services.AddTransient(typeof(IReservationService), typeof(ReservationServiceImpl));
+            services.AddTransient(typeof(IValidatorService), typeof(ValidatorServiceImpl));
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

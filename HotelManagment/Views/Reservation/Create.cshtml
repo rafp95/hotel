@@ -5,9 +5,9 @@
 
 @if (ViewBag.Error != null)
 {
-    <div class="alert alert-danger">
-        Proszę poprawnie wypełnić wszystkie pola
-    </div>
+<div class="alert alert-danger">
+    @ViewBag.Error
+</div>
 }
 
 @using (Html.BeginForm())
