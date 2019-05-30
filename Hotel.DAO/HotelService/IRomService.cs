@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hotel.DAO.HotelService
 {
-    public interface IRomService
+    public interface IRoomService
     {
         Task<IEnumerable<Room>> GetRoomsAsync();
         Task<Room> FindRoomByIdAsync(string id);

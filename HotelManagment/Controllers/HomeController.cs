@@ -16,11 +16,11 @@ namespace HotelManagment.Controllers
     public class HomeController : BaseController
     {
         private readonly IHotelInitialize _hotelInitialize;
-        private readonly IRomService _roomService;
+        private readonly IRoomService _roomService;
         private readonly IRoomStatusService _roomStatusService;
 
         public HomeController(IHotelInitialize hotelInitialize
-            , IRomService romService
+            , IRoomService romService
             , IRoomStatusService roomStatusService,
             IWorkerSendEmailService workerSendEmail) : base(workerSendEmail)
         {

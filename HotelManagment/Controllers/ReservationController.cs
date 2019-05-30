@@ -12,12 +12,12 @@ namespace HotelManagment.Controllers
 {
     public class ReservationController : BaseController
     {
-        private readonly IRomService _roomService;
+        private readonly IRoomService _roomService;
         private readonly IGuestService _guestService;
         private readonly IReservationService _reservationService;
         private readonly IValidatorService _validatorService;
 
-        public ReservationController(IRomService roomService
+        public ReservationController(IRoomService roomService
             , IReservationService reservationService
             , IWorkerSendEmailService workerSendEmailService
             , IGuestService guestService

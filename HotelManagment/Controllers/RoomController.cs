@@ -12,11 +12,11 @@ namespace HotelManagment.Controllers
 {
     public class RoomController : BaseController
     {
-        private readonly IRomService _romService;
+        private readonly IRoomService _romService;
         private readonly IRoomStatusService _roomStatusService;
         private readonly IRoomCateggoryService _roomCateggory;
 
-        public RoomController(IRomService romService
+        public RoomController(IRoomService romService
             , IRoomStatusService roomStatusService
             , IWorkerSendEmailService workerSendEmail
             , IRoomCateggoryService roomCateggory) : base(workerSendEmail)

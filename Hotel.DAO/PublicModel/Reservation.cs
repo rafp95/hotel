@@ -17,7 +17,7 @@ namespace Hotel.DAO.PublicModel
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Od")]
         [BsonElement("FromDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy HH:mm}")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         [DateTime]
         public DateTime FromDate { get; set; }
@@ -25,7 +25,7 @@ namespace Hotel.DAO.PublicModel
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Do")]
         [BsonElement("ToDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy HH:mm}")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         [DateTime]
         public DateTime ToDate { get; set; }

@@ -3,39 +3,48 @@
 
 // Write your JavaScript code.
 $(function () {
-    let dateFormat = "dd.mm.yy",
-        from = $("#fromDate")
-            .datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 2,
-                defaultDate: new Date(),
-                dateFormat: "dd.mm.yy",
-            })
-            .on("change", function () {
-                to.datepicker("option", "minDate", getDate(this));
-            }),
-        to = $("#toDate").datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 2,
-            dateFormat: "dd.mm.yy",
-            defaultDate: new Date(),
-        })
-            .on("change", function () {
-                from.datepicker("option", "maxDate", getDate(this));
-            });
 
-    function getDate(element) {
-        var date;
-        try {
-            date = $.datepicker.parseDate(dateFormat, element.value);
-        } catch (error) {
-            date = null;
-        }
+    //$("#fromDate").shieldDateTimePicker({
+    //    openOnFocus: false,
+    //    showButton: true,
+    //    editable: true,
+    //    messages: { calendarIconTooltip: "open" },
+    //    value: new Date(1900, 1, 1, 12, 0)
+    //});
 
-        return date;
-    }
+    //let dateFormat = "dd.mm.yy",
+    //    from = $("#fromDate")
+    //        .datepicker({
+    //            defaultDate: "+1w",
+    //            changeMonth: true,
+    //            numberOfMonths: 2,
+    //            defaultDate: new Date(),
+    //            dateFormat: "dd.mm.yy",
+    //        })
+    //        .on("change", function () {
+    //            to.datepicker("option", "minDate", getDate(this));
+    //        }),
+    //    to = $("#toDate").datepicker({
+    //        defaultDate: "+1w",
+    //        changeMonth: true,
+    //        numberOfMonths: 2,
+    //        dateFormat: "dd.mm.yy",
+    //        defaultDate: new Date(),
+    //    })
+    //        .on("change", function () {
+    //            from.datepicker("option", "maxDate", getDate(this));
+    //        });
+
+    //function getDate(element) {
+    //    var date;
+    //    try {
+    //        date = $.datepicker.parseDate(dateFormat, element.value);
+    //    } catch (error) {
+    //        date = null;
+    //    }
+
+    //    return date;
+    //}
     $('div.main-loader').fadeOut('slow');
     $("alert").fadeIn();
 });

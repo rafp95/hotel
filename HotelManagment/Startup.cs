@@ -38,7 +38,7 @@ namespace HotelManagment
             #region services
             services.AddTransient(typeof(IConnectionService<>), typeof(ConnectionServiceImpl<>));
             services.AddTransient(typeof(IHotelInitialize), typeof(HoteInitializeSerivce));
-            services.AddTransient(typeof(IRomService), typeof(RomServiceImpl));
+            services.AddTransient(typeof(IRoomService), typeof(RomServiceImpl));
             services.AddTransient(typeof(IRoomStatusService), typeof(RoomStatusServiceImpl));
             services.AddTransient(typeof(ISendEmailService), typeof(SendEmailServiceImpl));
             services.AddTransient(typeof(IRoomCateggoryService), typeof(RoomCategoryServiceImpl));

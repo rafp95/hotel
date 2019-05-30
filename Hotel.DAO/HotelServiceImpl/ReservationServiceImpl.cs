@@ -12,10 +12,13 @@ namespace Hotel.DAO.HotelServiceImpl
     {
 
         private readonly IMongoCollection<Reservation> _reservation;
+        private readonly IRoomService _roomService;
 
-        public ReservationServiceImpl(IConnectionService<Reservation> reservation)
+        public ReservationServiceImpl(IConnectionService<Reservation> reservation
+            ,IRoomService roomService)
         {
             this._reservation = reservation.GetMongoCollection("Hotel.Reservation");
+            _roomService = roomService;
         }
 
         public async Task<IEnumerable<Reservation>> FindNonConfirmClientByEmailAsync()
@@ -36,6 +39,9 @@ namespace Hotel.DAO.HotelServiceImpl
         public async Task SaveReservationAsync(Reservation reservation)
         {
             reservation.EmailSend = 'n';
+            var room = await _roomService.FindRoomByIdAsync(reservation.Rooms.ID);
+            room.Status.Available = "Nie";
+            await _roomService.UpdateRoomAsync(room, reservation.Rooms.ID);
             await _reservation.InsertOneAsync(reservation);
         }
 
