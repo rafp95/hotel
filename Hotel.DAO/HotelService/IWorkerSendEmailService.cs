@@ -8,5 +8,6 @@ namespace Hotel.DAO.HotelService
     public interface IWorkerSendEmailService
     {
         Task SendEmail(string from, string to, string descr);
+        Task SendEmailToClients();
     }
 }

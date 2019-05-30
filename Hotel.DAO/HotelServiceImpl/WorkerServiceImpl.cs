@@ -15,7 +15,7 @@ namespace Hotel.DAO.HotelServiceImpl
         private IReservationService _reservationService;
 
         public WorkerServiceImpl(ISendEmailService sendEmailService
-            ,IReservationService reservationService)
+            , IReservationService reservationService)
         {
             _sendEmailService = sendEmailService;
             _reservationService = reservationService;
@@ -48,7 +48,7 @@ namespace Hotel.DAO.HotelServiceImpl
             //    Task.Run( async() => await SendEmail("p.rafal123@gmail.com", item.Guest.Email, $"Przypomnienie o rezerwacji od {item.ToDate.ToShortDateString() } do {item.ToDate.ToShortDateString()}"));
             //}
 
-
+            Task.Run(async () => await SendEmailToClients());
 
 
         }
@@ -56,6 +56,17 @@ namespace Hotel.DAO.HotelServiceImpl
         public async Task SendEmail(string from, string to, string descr)
         {
             await _sendEmailService.SendEmail(from, to, descr);
+        }
+
+        public async Task SendEmailToClients()
+        {
+            var nonConfirmedClient = await _reservationService.FindNonConfirmClientByEmailAsync();
+            foreach (var item in nonConfirmedClient)
+            {
+                await SendEmail("p.rafal123@gmail.com", item.Guest.Email, $"Przypomnienie o rezerwacji w hotelu gościneic dnia {item.FromDate.ToShortDateString()}");
+                item.EmailSend = 't';
+                await _reservationService.UpdateReservationAsync(item, item.ID);
+            }
         }
     }
 }

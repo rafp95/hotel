@@ -45,6 +45,9 @@ namespace Hotel.DAO.PublicModel
         [BsonElement("PokojID")]
         public string Room { get; set; }
 
+        [BsonElement("EmailSend")]
+        public char EmailSend { get; set; }
+
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Room")]
         [BsonElement("Pokój")]

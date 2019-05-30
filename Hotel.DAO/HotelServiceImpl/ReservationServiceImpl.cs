@@ -18,6 +18,11 @@ namespace Hotel.DAO.HotelServiceImpl
             this._reservation = reservation.GetMongoCollection("Hotel.Reservation");
         }
 
+        public async Task<IEnumerable<Reservation>> FindNonConfirmClientByEmailAsync()
+        {
+            return await _reservation.Find(_ => _.EmailSend == 'n').ToListAsync();
+        }
+
         public async Task<Reservation> FindReservationByIdAsync(string id)
         {
             return await _reservation.Find(_ => _.ID == id).FirstOrDefaultAsync();
@@ -30,6 +35,7 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public async Task SaveReservationAsync(Reservation reservation)
         {
+            reservation.EmailSend = 'n';
             await _reservation.InsertOneAsync(reservation);
         }
 
