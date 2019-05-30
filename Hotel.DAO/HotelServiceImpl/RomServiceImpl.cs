@@ -45,9 +45,20 @@ namespace Hotel.DAO.HotelService
             return await _room.Find(_ => true).ToListAsync();
         }
 
+        public async Task UpdateRoomAsync(Room room, bool unregister, string id)
+        {
+            if (unregister)
+            {
+                room.Status.Available = "Tak";
+            }
+
+            await _room.FindOneAndReplaceAsync(_ => _.ID == id, room);
+        }
+
         public async Task UpdateRoomAsync(Room room, string id)
         {
             await _room.FindOneAndReplaceAsync(_ => _.ID == id, room);
         }
+
     }
 }

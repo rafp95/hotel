@@ -53,6 +53,8 @@ namespace Hotel.DAO.PublicModel
         [BsonElement("Pokój")]
         public Room Rooms { get; set; }
 
-
+        [Display(Name = "Czy chcesz wyrejestrować gościa")]
+        [BsonElement("Unregister")]
+        public bool Unregister { get; set; }
     }
 }

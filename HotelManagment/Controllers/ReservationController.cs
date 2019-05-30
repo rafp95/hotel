@@ -153,9 +153,6 @@ namespace HotelManagment.Controllers
         {
             try
             {
-
-                List<SelectListItem> selectListItems = await RoomAvaiable();
-                ViewBag.Room = selectListItems;
                 DateTime now = DateTime.Now;
                 // TODO: Add insert logic here
                 if (_validatorService.DateIsValid(reservation, now))
@@ -165,7 +162,6 @@ namespace HotelManagment.Controllers
                 }
                 else
                 {
-
                     var pom = await _guestService.FindGuestByIdAsync(reservation.GuestID);
                     var pom2 = await _roomService.FindRoomByIdAsync(reservation.Room);
                     reservation.GuestID = pom.ID;

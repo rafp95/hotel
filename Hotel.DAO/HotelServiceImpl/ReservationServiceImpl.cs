@@ -47,6 +47,19 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public async Task<Reservation> UpdateReservationAsync(Reservation reservation, string id)
         {
+            var room = await _roomService.FindRoomByIdAsync(reservation.Rooms.ID);
+            if (!reservation.Unregister)
+            {
+                room.Status.Available = "Nie";
+            }
+            else
+            {
+                room.Status.Available = "Tak";
+                reservation.EmailSend = 't';
+                reservation.ToDate = DateTime.Now;
+            }
+
+            await _roomService.UpdateRoomAsync(room, reservation.Unregister, reservation.Rooms.ID);
             return await _reservation.FindOneAndReplaceAsync(_ => _.ID == id, reservation);
         }
     }
