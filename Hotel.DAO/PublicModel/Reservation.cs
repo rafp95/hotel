@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Hotel.DAO.Infrastucture;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Hotel.DAO.PublicModel
         [BsonElement("FromDate")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        [DateTime]
         public DateTime FromDate { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
@@ -25,6 +27,7 @@ namespace Hotel.DAO.PublicModel
         [BsonElement("ToDate")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        [DateTime]
         public DateTime ToDate { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]

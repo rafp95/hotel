@@ -9,9 +9,8 @@ $(function () {
                 defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 2,
-                locale: 'pl',
                 defaultDate: new Date(),
-                dateFormat: "dd.mm.yy"
+                dateFormat: "dd.mm.yy",
             })
             .on("change", function () {
                 to.datepicker("option", "minDate", getDate(this));
@@ -21,7 +20,7 @@ $(function () {
             changeMonth: true,
             numberOfMonths: 2,
             dateFormat: "dd.mm.yy",
-            defaultDate: new Date()
+            defaultDate: new Date(),
         })
             .on("change", function () {
                 from.datepicker("option", "maxDate", getDate(this));

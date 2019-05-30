@@ -97,8 +97,9 @@ namespace HotelManagment.Controllers
                 {
                     ViewBag.Error = $"Brak wolnych pokoji";
                     return View();
-                }else if(reservation.FromDate.ToUniversalTime() < DateTime.Now 
-                    || reservation.ToDate.ToUniversalTime() < DateTime.Now)
+                }
+                else if (reservation.FromDate.ToUniversalTime() < DateTime.Now
+                   || reservation.ToDate.ToUniversalTime() < DateTime.Now)
                 {
                     ViewBag.Error = $"Błędne daty";
                 }
@@ -147,6 +148,7 @@ namespace HotelManagment.Controllers
             {
                 List<SelectListItem> selectListItems = await RoomAvaiable();
                 ViewBag.Room = selectListItems;
+                // TODO walidacja daty
                 // TODO: Add update logic here
                 var pom = await _guestService.FindGuestByIdAsync(reservation.GuestID);
                 var pom2 = await _roomService.FindRoomByIdAsync(reservation.Room);
