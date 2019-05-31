@@ -8,6 +8,11 @@ namespace Hotel.DAO.HotelServiceImpl
 {
     public class ValidatorServiceImpl : IValidatorService
     {
+        public int DateBetweenDays(DateTime from, DateTime now)
+        {
+            return (int)Math.Round(from.Subtract(now).TotalDays);
+        }
+
         public bool DateIsValid(Reservation reservation, DateTime now)
         {
             return new DateTime(reservation.FromDate.Year, reservation.FromDate.Month, reservation.FromDate.Day)

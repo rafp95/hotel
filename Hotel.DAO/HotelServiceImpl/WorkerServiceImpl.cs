@@ -13,12 +13,15 @@ namespace Hotel.DAO.HotelServiceImpl
         private BackgroundWorker _backgroundWorker = new BackgroundWorker();
         private ISendEmailService _sendEmailService;
         private IReservationService _reservationService;
+        private IValidatorService _validatorService;
 
         public WorkerServiceImpl(ISendEmailService sendEmailService
-            , IReservationService reservationService)
+            , IReservationService reservationService
+            , IValidatorService validatorService)
         {
             _sendEmailService = sendEmailService;
             _reservationService = reservationService;
+            _validatorService = validatorService;
             _backgroundWorker.RunWorkerAsync();
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
@@ -61,11 +64,17 @@ namespace Hotel.DAO.HotelServiceImpl
         public async Task SendEmailToClients()
         {
             var nonConfirmedClient = await _reservationService.FindNonConfirmClientByEmailAsync();
+            var now = DateTime.Now;
             foreach (var item in nonConfirmedClient)
             {
-                await SendEmail("p.rafal123@gmail.com", item.Guest.Email, $"Przypomnienie o rezerwacji w hotelu gościneic dnia {item.FromDate.ToShortDateString()}");
-                item.EmailSend = 't';
-                await _reservationService.UpdateReservationAsync(item, item.ID);
+                if (_validatorService.DateBetweenDays(item.FromDate, now) >= 0 
+                    && _validatorService.DateBetweenDays(item.FromDate, now) <= 1)
+                {
+                    await SendEmail("p.rafal123@gmail.com", item.Guest.Email
+                        , $"Przypomnienie o rezerwacji w hotelu gościneic dnia {item.FromDate}");
+                    item.EmailSend = true;
+                    await _reservationService.UpdateReservationAsync(item, item.ID);
+                }
             }
         }
     }

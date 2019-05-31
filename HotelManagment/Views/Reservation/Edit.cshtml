@@ -19,15 +19,29 @@
     <div class="form-group">
         <div class="col-md-12">
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "fromDate" } })
-            @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+            @if (Model.Unregister)
+            {
+                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "fromDate", @readonly = "readonly" } })
+            }
+            else
+            {
+                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "fromDate" } })
+            }
+            @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" }),
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-12">
             @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "toDate" } })
+            @if (Model.Unregister)
+            {
+                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "toDate", @readonly = "readonly" } })
+            }
+            else
+            {
+                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "toDate" } })
+            }
             @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagment", "HotelMana
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel.DAO", "Hotel.DAO\Hotel.DAO.csproj", "{000F2E0B-7111-4A32-96D8-195D731C331D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Tests", "Hotel.Tests\Hotel.Tests.csproj", "{6FB285B1-F847-4BE2-A9D0-4EB3F440D6EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{000F2E0B-7111-4A32-96D8-195D731C331D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{000F2E0B-7111-4A32-96D8-195D731C331D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{000F2E0B-7111-4A32-96D8-195D731C331D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FB285B1-F847-4BE2-A9D0-4EB3F440D6EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB285B1-F847-4BE2-A9D0-4EB3F440D6EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB285B1-F847-4BE2-A9D0-4EB3F440D6EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB285B1-F847-4BE2-A9D0-4EB3F440D6EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

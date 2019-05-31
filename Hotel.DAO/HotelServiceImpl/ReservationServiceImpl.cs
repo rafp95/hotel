@@ -23,7 +23,7 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public async Task<IEnumerable<Reservation>> FindNonConfirmClientByEmailAsync()
         {
-            return await _reservation.Find(_ => _.EmailSend == 'n').ToListAsync();
+            return await _reservation.Find(_ => _.EmailSend == false).ToListAsync();
         }
 
         public async Task<Reservation> FindReservationByIdAsync(string id)
@@ -38,7 +38,7 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public async Task SaveReservationAsync(Reservation reservation)
         {
-            reservation.EmailSend = 'n';
+            reservation.EmailSend = false;
             var room = await _roomService.FindRoomByIdAsync(reservation.Rooms.ID);
             room.Status.Available = "Nie";
             await _roomService.UpdateRoomAsync(room, reservation.Rooms.ID);
@@ -55,7 +55,7 @@ namespace Hotel.DAO.HotelServiceImpl
             else
             {
                 room.Status.Available = "Tak";
-                reservation.EmailSend = 't';
+                reservation.EmailSend = true;
                 reservation.ToDate = DateTime.Now;
             }
 
