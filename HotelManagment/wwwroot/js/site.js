@@ -51,6 +51,7 @@ $(function () {
     $('#searchInput').on('keyup', function () {
         let val = $(this).val().toLowerCase();
         $('tbody tr').filter(function () {
+            console.log($(this).text());
             $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
         });
     });
