@@ -24,7 +24,7 @@ namespace Hotel.DAO.PublicModel
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
-        [Display(Name = "Cena za dobę")]
+        [Display(Name = "Cena za dobę (PLN)")]
         [BsonElement("Amount")]
         public decimal Amount { get; set; }
 

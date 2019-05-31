@@ -56,5 +56,8 @@ namespace Hotel.DAO.PublicModel
         [Display(Name = "Czy chcesz wyrejestrować gościa")]
         [BsonElement("Unregister")]
         public bool Unregister { get; set; }
+
+        [BsonElement("Price")]
+        public decimal? Price { get; set; }
     }
 }

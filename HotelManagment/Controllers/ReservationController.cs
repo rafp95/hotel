@@ -168,6 +168,11 @@ namespace HotelManagment.Controllers
                     reservation.GuestID = pom.ID;
                     reservation.Guest = pom;
                     reservation.Rooms = pom2;
+                    if (reservation.Unregister)
+                    {
+                        reservation.Price = _reservationService.CalculatePriceToPay(_validatorService.DateBetweenDays(reservation.FromDate, now),reservation.Rooms.Amount);
+                    }
+
                     await _reservationService.UpdateReservationAsync(reservation, id);
                 }
             }

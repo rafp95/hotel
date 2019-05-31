@@ -21,6 +21,22 @@ namespace Hotel.DAO.HotelServiceImpl
             _roomService = roomService;
         }
 
+        public decimal CalculatePriceToPay(int days, decimal dayCost)
+        {
+            if(days == 0)
+            {
+                return dayCost;
+            }
+            else
+            {
+                if(days > 0)
+                {
+                    return days * dayCost;
+                }
+            }
+            return 0;
+        }
+
         public async Task<IEnumerable<Reservation>> FindNonConfirmClientByEmailAsync()
         {
             return await _reservation.Find(_ => _.EmailSend == false).ToListAsync();
