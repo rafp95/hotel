@@ -41,7 +41,7 @@ namespace Hotel.DAO.PublicModel
         public Guest Guest { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
-        [Display(Name = "Room")]
+        [Display(Name = "Pokój")]
         [BsonElement("PokojID")]
         public string Room { get; set; }
 
