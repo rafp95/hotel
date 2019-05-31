@@ -13,5 +13,7 @@ namespace Hotel.DAO.HotelService
         Task<Reservation> FindReservationByIdAsync(string id);
         Task<Reservation> UpdateReservationAsync(Reservation reservation, string id);
         Task<IEnumerable<Reservation>> FindNonConfirmClientByEmailAsync();
+        Task ReservationDelete(string id);
     }
+
 }

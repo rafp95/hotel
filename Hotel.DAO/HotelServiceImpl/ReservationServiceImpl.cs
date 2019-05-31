@@ -36,6 +36,11 @@ namespace Hotel.DAO.HotelServiceImpl
             return await _reservation.Find(_ => true).ToListAsync();
         }
 
+        public async Task ReservationDelete(string id)
+        {
+            await _reservation.DeleteOneAsync(_ => _.ID == id);
+        }
+
         public async Task SaveReservationAsync(Reservation reservation)
         {
             reservation.EmailSend = false;

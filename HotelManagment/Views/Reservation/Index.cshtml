@@ -3,54 +3,50 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FromDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GuestID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Room)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Guest.Name)
-                @Html.DisplayFor(modelItem => item.Guest.Surname)
-                @Html.DisplayFor(modelItem => item.Guest.Pesel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rooms.RoomNr)
-                @Html.DisplayFor(modelItem => item.Rooms.Category)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FromDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GuestID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Room)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FromDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ToDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Guest.Name)
+                        @Html.DisplayFor(modelItem => item.Guest.Surname)
+                        @Html.DisplayFor(modelItem => item.Guest.Pesel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rooms.RoomNr)
+                        @Html.DisplayFor(modelItem => item.Rooms.Category)
+                    </td>
+                    <td>
+                        @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("kas", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

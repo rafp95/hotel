@@ -182,7 +182,7 @@ namespace HotelManagment.Controllers
 
 
         // GET: Reservation/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }
@@ -190,12 +190,12 @@ namespace HotelManagment.Controllers
         // POST: Reservation/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                await _reservationService.ReservationDelete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
