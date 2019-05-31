@@ -47,4 +47,12 @@ $(function () {
     //}
     $('div.main-loader').fadeOut('slow');
     $("alert").fadeIn();
+
+    $('#searchInput').on('keyup', function () {
+        let val = $(this).val().toLowerCase();
+        $('tbody tr').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+        });
+    });
+
 });
