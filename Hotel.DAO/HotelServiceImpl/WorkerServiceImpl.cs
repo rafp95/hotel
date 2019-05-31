@@ -56,9 +56,9 @@ namespace Hotel.DAO.HotelServiceImpl
 
         }
 
-        public async Task SendEmail(string from, string to, string descr)
+        public async Task SendEmail(string from, string title, string descr)
         {
-            await _sendEmailService.SendEmail(from, to, descr);
+            await _sendEmailService.SendEmail(from, title, descr);
         }
 
         public async Task SendEmailToClients()
@@ -70,7 +70,7 @@ namespace Hotel.DAO.HotelServiceImpl
                 if (_validatorService.DateBetweenDays(item.FromDate, now) >= 0 
                     && _validatorService.DateBetweenDays(item.FromDate, now) <= 1)
                 {
-                    await SendEmail("p.rafal123@gmail.com", item.Guest.Email
+                    await SendEmail(item.Guest.Email, "Hotel Gościniec"
                         , $"Przypomnienie o rezerwacji w hotelu gościneic dnia {item.FromDate}");
                     item.EmailSend = true;
                     await _reservationService.UpdateReservationAsync(item, item.ID);
