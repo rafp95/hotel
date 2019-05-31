@@ -30,6 +30,12 @@
                 <th>
                     @Html.DisplayName("Do zapłaty")
                 </th>
+                <th>
+                    @Html.DisplayName("Czy przybył")
+                </th>
+                <th>
+                    Akcja
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -64,11 +70,21 @@
                     <td>
                         @if (item.Price.HasValue)
                         {
-                           @item.Price <span> zł</span>
+                            @item.Price <span> zł</span>
                         }
                         else
                         {
                             <span>0 zł</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.IsConfirmed)
+                        {
+                            <spa>Tak</spa>
+                        }
+                        else
+                        {
+                            <span>Nie</span>
                         }
                     </td>
                     <td>

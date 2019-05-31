@@ -66,7 +66,6 @@ namespace HotelManagment.Controllers
                     $"Kategoria = {item.Category.Category} | " +
                     $"Ilość osób = {item.Capacity}",
                     Value = item.ID
-                    //Selected =  string.IsNullOrEmpty(item.ID) ? true : false
                 };
                 selectListItems.Add(selectListItem);
 
@@ -154,12 +153,14 @@ namespace HotelManagment.Controllers
         {
             try
             {
+                List<SelectListItem> selectListItems = await RoomAvaiable();
+                ViewBag.Room = selectListItems;
                 DateTime now = DateTime.Now;
                 // TODO: Add insert logic here
                 if (_validatorService.DateIsValid(reservation, now))
                 {
                     ViewBag.Error = $"Błędne daty";
-                    return View();
+                    return View(reservation);
                 }
                 else
                 {
@@ -178,7 +179,7 @@ namespace HotelManagment.Controllers
             }
             catch
             {
-                return View();
+                return View(reservation);
             }
 
             // TODO walidacja daty

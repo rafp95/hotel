@@ -14,12 +14,17 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(model => model.GuestID)
-    @Html.HiddenFor(model => model.Room)
+
+    @if (Model.IsConfirmed)
+    {
+        @Html.HiddenFor(model => model.Room)
+        @Html.HiddenFor(model => model.IsConfirmed)
+    }
 
     <div class="form-group">
         <div class="col-md-12">
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
-            @if (Model != null && Model.Unregister)
+            @if (Model.Unregister)
             {
                 @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "fromDate", @readonly = "readonly" } })
             }
@@ -46,27 +51,51 @@
         </div>
     </div>
 
-    @if (!Model.Unregister)
+    @if (!Model.IsConfirmed)
     {
+
         <div class="form-group">
             <div class="col-md-12">
-                @Html.LabelFor(model => model.Unregister, htmlAttributes: new { @class = "control-label" })
-                @Html.CheckBox("Unregister", Model.Unregister, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Unregister, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Room, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.Room, ViewBag.Rooms as SelectList, "Kategoria pokoju", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Room, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.IsConfirmed)
+                @Html.CheckBox(nameof(Model.IsConfirmed), Model.IsConfirmed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsConfirmed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
     }
     else
     {
-        <div class="form-group">
-            <div class="col-md-12">
-                Zostałeś już wyrejestrowany z pokoju
+        @if (!Model.Unregister)
+        {
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Unregister)
+                    @Html.CheckBox(nameof(Model.Unregister), Model.Unregister, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Unregister, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-12">
+                    Zostałeś już wyrejestrowany z pokoju
+                </div>
+            </div>
+        }
     }
 
-    @if (!Model.Unregister)
+    @if (!Model.IsConfirmed
+|| !Model.Unregister)
     {
         <div class="form-group">
             <div class="col-md-12">
@@ -74,6 +103,8 @@
             </div>
         </div>
     }
+
+
 }
 
 @section Scripts {

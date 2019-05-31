@@ -15,7 +15,7 @@ namespace Hotel.DAO.HotelServiceImpl
         private readonly IRoomService _roomService;
 
         public ReservationServiceImpl(IConnectionService<Reservation> reservation
-            ,IRoomService roomService)
+            , IRoomService roomService)
         {
             this._reservation = reservation.GetMongoCollection("Hotel.Reservation");
             _roomService = roomService;
@@ -23,13 +23,13 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public decimal CalculatePriceToPay(int days, decimal dayCost)
         {
-            if(days == 0)
+            if (days == 0)
             {
                 return dayCost;
             }
             else
             {
-                if(days > 0)
+                if (days > 0)
                 {
                     return days * dayCost;
                 }
@@ -61,26 +61,36 @@ namespace Hotel.DAO.HotelServiceImpl
         {
             reservation.EmailSend = false;
             var room = await _roomService.FindRoomByIdAsync(reservation.Rooms.ID);
-            room.Status.Available = "Nie";
             await _roomService.UpdateRoomAsync(room, reservation.Rooms.ID);
             await _reservation.InsertOneAsync(reservation);
         }
 
         public async Task<Reservation> UpdateReservationAsync(Reservation reservation, string id)
         {
-            var room = await _roomService.FindRoomByIdAsync(reservation.Rooms.ID);
-            if (!reservation.Unregister)
+            var room = await _roomService.FindRoomByIdAsync(reservation.Room);
+            if (reservation.IsConfirmed
+                && !reservation.Unregister)
             {
                 room.Status.Available = "Nie";
+                reservation.FromDate = DateTime.Now;
+                reservation.EmailSend = true;
             }
             else
             {
-                room.Status.Available = "Tak";
-                reservation.EmailSend = true;
-                reservation.ToDate = DateTime.Now;
+                if (reservation.Unregister)
+                {
+                    reservation.ToDate = DateTime.Now;
+                    room.Status.Available = "Tak";
+                    reservation.EmailSend = true;
+                }
+                else
+                {
+                    reservation.EmailSend = false;
+                }
+               
             }
 
-            await _roomService.UpdateRoomAsync(room, reservation.Unregister, reservation.Rooms.ID);
+            await _roomService.UpdateRoomAsync(room, reservation.Rooms.ID);
             return await _reservation.FindOneAndReplaceAsync(_ => _.ID == id, reservation);
         }
     }

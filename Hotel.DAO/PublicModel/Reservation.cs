@@ -59,5 +59,9 @@ namespace Hotel.DAO.PublicModel
 
         [BsonElement("Price")]
         public decimal? Price { get; set; }
+
+        [Display(Name = "Czy gość przybył?")]
+        [BsonElement("IsConfirmed")]
+        public bool IsConfirmed { get; set; }
     }
 }

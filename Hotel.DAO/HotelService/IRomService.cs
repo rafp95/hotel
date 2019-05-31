@@ -12,7 +12,6 @@ namespace Hotel.DAO.HotelService
         Task<Room> FindRoomByIdAsync(string id);
         Task AddRoomAsync(Room room);
         Task UpdateRoomAsync(Room room, string id);
-        Task UpdateRoomAsync(Room room, bool isAvaiable, string id);
         Task DeleteRoomAsync(string id);
         Task<IEnumerable<Room>> FindAvaiableRoomAsync();
         
