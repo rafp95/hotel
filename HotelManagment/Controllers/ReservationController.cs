@@ -87,6 +87,7 @@ namespace HotelManagment.Controllers
         {
             try
             {
+                ViewBag.NameGuest = reservation.GuestID;
                 List<SelectListItem> selectListItems = await RoomAvaiable();
                 ViewBag.Room = selectListItems;
                 DateTime now = DateTime.Now;

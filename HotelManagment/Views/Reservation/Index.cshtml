@@ -19,6 +19,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Room)
                 </th>
+                <th>
+                    @Html.DisplayName("Wyrejestrowany?")
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -40,6 +43,16 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Rooms.RoomNr)
                         @Html.DisplayFor(modelItem => item.Rooms.Category)
+                    </td>
+                    <td>
+                        @if (item.Unregister)
+                        {
+                            <span>Tak</span>
+                        }
+                        else
+                        {
+                            <span>Nie</span>
+                        }
                     </td>
                     <td>
                         @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })

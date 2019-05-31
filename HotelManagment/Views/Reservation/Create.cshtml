@@ -21,6 +21,7 @@
                    data-autocomplete-source="@Url.Action("Sugestions", "Guest")"
                    class="form-control"
                    name="GuestID"
+                   value="@ViewBag.NameGuest"
                    placeholder="Wyszukaj gościa" />
             @Html.ValidationMessageFor(model => model.GuestID, "", new { @class = "text-danger" })
         </div>

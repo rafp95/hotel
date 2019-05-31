@@ -18,7 +18,9 @@ namespace Hotel.DAO.HotelServiceImpl
             return new DateTime(reservation.FromDate.Year, reservation.FromDate.Month, reservation.FromDate.Day)
                     < new DateTime(now.Year, now.Month, now.Day)
                     || new DateTime(reservation.ToDate.Year, reservation.ToDate.Month, reservation.ToDate.Day)
-                    < new DateTime(now.Year, now.Month, now.Day);
+                    < new DateTime(now.Year, now.Month, now.Day)
+                    || new DateTime(reservation.FromDate.Year, reservation.FromDate.Month, reservation.FromDate.Day) >
+                    new DateTime(reservation.ToDate.Year, reservation.ToDate.Month, reservation.ToDate.Day);
         }
     }
 }

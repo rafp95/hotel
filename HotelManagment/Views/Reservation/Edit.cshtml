@@ -19,7 +19,7 @@
     <div class="form-group">
         <div class="col-md-12">
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
-            @if (Model.Unregister)
+            @if (Model != null && Model.Unregister)
             {
                 @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "fromDate", @readonly = "readonly" } })
             }
