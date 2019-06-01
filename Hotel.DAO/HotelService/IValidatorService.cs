@@ -7,7 +7,7 @@ namespace Hotel.DAO.HotelService
 {
     public interface IValidatorService
     {
-        bool DateIsValid(Reservation from, DateTime now);
+        bool DateIsInValid(Reservation from, DateTime now);
         int DateBetweenDays(DateTime from, DateTime now);
     }
 }

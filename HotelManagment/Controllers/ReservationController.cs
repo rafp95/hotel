@@ -105,14 +105,14 @@ namespace HotelManagment.Controllers
                     ViewBag.Error = $"Brak wolnych pokoji";
                     return View();
                 }
-                else if (_validatorService.DateIsValid(reservation, now))
+                else if (_validatorService.DateIsInValid(reservation, now))
                 {
                     ViewBag.Error = $"Błędne daty";
                     return View();
                 }
                 else
                 {
-                    
+
                     if (buf.Length < 3)
                     {
                         ViewBag.Error = $"Nie znaleziono takiego gościa";
@@ -158,7 +158,7 @@ namespace HotelManagment.Controllers
                 ViewBag.Room = selectListItems;
                 DateTime now = DateTime.Now;
                 // TODO: Add insert logic here
-                if (_validatorService.DateIsValid(reservation, now))
+                if (_validatorService.DateIsInValid(reservation, now))
                 {
                     ViewBag.Error = $"Błędne daty";
                     return View(reservation);
@@ -167,21 +167,31 @@ namespace HotelManagment.Controllers
                 {
                     var pom = await _guestService.FindGuestByIdAsync(reservation.GuestID);
                     var pom2 = await _roomService.FindRoomByIdAsync(reservation.Room);
-                    reservation.GuestID = pom.ID;
-                    reservation.Guest = pom;
-                    reservation.Rooms = pom2;
-                    if (reservation.Unregister)
-                    {
-                        reservation.Price = _reservationService.CalculatePriceToPay(_validatorService.DateBetweenDays(reservation.FromDate, now),reservation.Rooms.Amount);
-                    }
 
-                    await _reservationService.UpdateReservationAsync(reservation, id);
+                    if (pom2 == null)
+                    {
+                        ViewBag.Error = $"Wybrany pokój nie istnieje";
+                        return View(reservation);
+                    }
+                    else
+                    {
+                        reservation.GuestID = pom.ID;
+                        reservation.Guest = pom;
+                        reservation.Rooms = pom2;
+                        if (reservation.Unregister)
+                        {
+                            reservation.Price = _reservationService.CalculatePriceToPay(_validatorService.DateBetweenDays(reservation.FromDate, now), reservation.Rooms.Amount);
+                        }
+                        await _reservationService.UpdateReservationAsync(reservation, id);
+                        TempData["CRUDinfo"] = "Zaktualizowno pomyślnie";
+                    }
                 }
-                TempData["CRUDinfo"] = "Zaktualizowno pomyślnie";
+
             }
             catch
             {
-                return View(reservation);
+                ViewBag.Error = $"Zostały wybrane błędne dane";
+                return View(await _reservationService.FindReservationByIdAsync(id));
             }
 
             // TODO walidacja daty

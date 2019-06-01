@@ -14,7 +14,7 @@ namespace Hotel.DAO.HotelServiceImpl
                 .Subtract(new DateTime(now.Year, now.Month,now.Day)).TotalDays);
         }
 
-        public bool DateIsValid(Reservation reservation, DateTime now)
+        public bool DateIsInValid(Reservation reservation, DateTime now)
         {
             return new DateTime(reservation.FromDate.Year, reservation.FromDate.Month, reservation.FromDate.Day)
                     < new DateTime(now.Year, now.Month, now.Day)

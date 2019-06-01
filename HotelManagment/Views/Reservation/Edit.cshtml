@@ -5,7 +5,7 @@
 @if (ViewBag.Error != null)
 {
     <div class="alert alert-danger">
-        Proszę poprawnie wypełnić wszystkie pola
+        @ViewBag.Error
     </div>
 }
 
@@ -95,7 +95,7 @@
     }
 
     @if (!Model.IsConfirmed
-       || !Model.Unregister)
+      || !Model.Unregister)
     {
         <div class="form-group">
             <div class="col-md-12">
