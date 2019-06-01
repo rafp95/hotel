@@ -10,7 +10,8 @@ namespace Hotel.DAO.HotelServiceImpl
     {
         public int DateBetweenDays(DateTime from, DateTime now)
         {
-            return (int)Math.Round(from.Subtract(now).TotalDays);
+            return (int)Math.Round(new DateTime(from.Year,from.Month,from.Day)
+                .Subtract(new DateTime(now.Year, now.Month,now.Day)).TotalDays);
         }
 
         public bool DateIsValid(Reservation reservation, DateTime now)

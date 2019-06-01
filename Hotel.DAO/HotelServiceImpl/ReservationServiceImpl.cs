@@ -37,6 +37,11 @@ namespace Hotel.DAO.HotelServiceImpl
             return 0;
         }
 
+        public async Task SetUserIsConfirmedByEmailAsync(Reservation reservation, string id)
+        {
+            await _reservation.FindOneAndReplaceAsync(_ => _.ID == id, reservation);
+        }
+
         public async Task<IEnumerable<Reservation>> FindNonConfirmClientByEmailAsync()
         {
             return await _reservation.Find(_ => _.EmailSend == false).ToListAsync();

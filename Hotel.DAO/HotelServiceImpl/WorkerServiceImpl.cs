@@ -73,7 +73,8 @@ namespace Hotel.DAO.HotelServiceImpl
                     await SendEmail(item.Guest.Email, "Hotel Gościniec"
                         , $"Przypomnienie o rezerwacji w hotelu gościneic dnia {item.FromDate}");
                     item.EmailSend = true;
-                    await _reservationService.UpdateReservationAsync(item, item.ID);
+                    await _reservationService.SetUserIsConfirmedByEmailAsync(item, item.ID);
+                    
                 }
             }
         }

@@ -15,6 +15,7 @@ namespace Hotel.DAO.HotelService
         decimal CalculatePriceToPay(int days, decimal dayCost);
         Task<IEnumerable<Reservation>> FindNonConfirmClientByEmailAsync();
         Task ReservationDelete(string id);
+        Task SetUserIsConfirmedByEmailAsync(Reservation reservation, string id);
     }
 
 }
