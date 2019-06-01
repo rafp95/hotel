@@ -26,11 +26,11 @@
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
             @if (Model.Unregister)
             {
-                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "fromDate", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "fromDate", @readonly = "readonly" } })
             }
             else
             {
-                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "fromDate" } })
+                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "fromDate" } })
             }
             @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
         </div>
@@ -41,11 +41,11 @@
             @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label" })
             @if (Model.Unregister)
             {
-                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "toDate", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "toDate", @readonly = "readonly" } })
             }
             else
             {
-                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "toDate" } })
+                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "toDate"} })
             }
             @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
         </div>

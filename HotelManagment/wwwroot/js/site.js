@@ -45,6 +45,12 @@ $(function () {
 
     //    return date;
     //}
+    $('#fromDate,#toDate')
+        .datetimepicker({
+            format: 'd.m.y H:i',
+        });
+    $.datetimepicker.setLocale('pl');
+
     $('div.main-loader').fadeOut('slow');
     $("alert").fadeIn();
 
