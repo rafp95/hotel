@@ -2,52 +2,59 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+nav > div.container, .navbar-collapse {
+    transition: .5s ease-in-out;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    -moz-animation: fade .5s; /* Firefox */
-    -webkit-animation: fade .5s; /* Safari and Chrome */
-    -o-animation: fade .5s;
-    animation: fade .5s; /* Opera */
+    -moz-animation: fade 1s; /* Firefox */
+    -webkit-animation: fade 1s; /* Safari and Chrome */
+    -o-animation: fade 1s;
+    animation: fade 1s; /* Opera */
+    transition: .5s all ease-in-out;
 }
 
 @-webkit-keyframes fade {
@@ -81,13 +88,13 @@ body {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 /*loader*/
@@ -173,7 +180,7 @@ div.main-loader {
 }
 /*end loader*/
 /*global th nowrap line*/
-th,td {
+th, td {
     white-space: nowrap;
     text-align: center;
     vertical-align: middle;
