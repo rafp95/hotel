@@ -11,6 +11,17 @@
 <p>
     <a asp-action="Create">Dodaj nowego gościa</a>
 </p>
+
+
+@if (TempData["CRUDinfo"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @TempData["CRUDinfo"]
+    </div>
+}
+
+
 <div class="table-responsive guest-container">
     <table class="table table-striped">
         <thead>

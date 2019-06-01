@@ -129,6 +129,7 @@ namespace HotelManagment.Controllers
                     }
                 }
 
+                TempData["CRUDinfo"] = "Utworzono pomyślnie";
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -176,6 +177,7 @@ namespace HotelManagment.Controllers
 
                     await _reservationService.UpdateReservationAsync(reservation, id);
                 }
+                TempData["CRUDinfo"] = "Zaktualizowno pomyślnie";
             }
             catch
             {
@@ -203,6 +205,7 @@ namespace HotelManagment.Controllers
             {
                 // TODO: Add delete logic here
                 await _reservationService.ReservationDelete(id);
+                TempData["CRUDinfo"] = "Skasowno pomyślnie";
                 return RedirectToAction(nameof(Index));
             }
             catch

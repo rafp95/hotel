@@ -56,6 +56,7 @@ namespace HotelManagment.Controllers
             {
                 // TODO: Add insert logic here
                 await _romService.AddRoomAsync(room);
+                TempData["CRUDinfo"] = "Utworzono pomyślnie";
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -92,6 +93,7 @@ namespace HotelManagment.Controllers
                 await StatusRoom();
                 await CattegoryRoom();
                 // TODO: Add update logic here
+                TempData["CRUDinfo"] = "Zaktualizowano pomyślnie";
                 await _romService.UpdateRoomAsync(room, id);
                 return RedirectToAction(nameof(Index));
             }
@@ -116,6 +118,7 @@ namespace HotelManagment.Controllers
             {
                 // TODO: Add delete logic here
                 await _romService.DeleteRoomAsync(id);
+                TempData["CRUDinfo"] = "Skasowno pomyślnie";
                 return RedirectToAction(nameof(Index));
             }
             catch

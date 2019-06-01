@@ -56,4 +56,9 @@ $(function () {
         });
     });
 
+    $("div.alert>a.close").off('click').on('click', function () {
+        $(this).parent().fadeOut('slow');
+        return false;
+    });
+
 });

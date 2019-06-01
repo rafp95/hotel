@@ -49,6 +49,7 @@ namespace HotelManagment.Controllers
             {
                 // TODO: Add insert logic here
                 await _guestService.AddQuestAsync(guest);
+                TempData["CRUDinfo"] = "Utworzono pomyślnie";
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -72,6 +73,7 @@ namespace HotelManagment.Controllers
             {
                 // TODO: Add update logic here
                 await _guestService.UpdateQuest(guest, id);
+                TempData["CRUDinfo"] = "Zaktualizowano pomyślnie";
                 return RedirectToAction(nameof(Index));
             }
             catch
