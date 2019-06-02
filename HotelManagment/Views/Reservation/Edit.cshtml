@@ -24,7 +24,8 @@
     <div class="form-group">
         <div class="col-md-12">
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
-            @if (Model.Unregister)
+            @if (Model.Unregister
+                || Model.IsConfirmed)
             {
                 @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "fromDate", @readonly = "readonly" } })
             }
@@ -39,7 +40,8 @@
     <div class="form-group">
         <div class="col-md-12">
             @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label" })
-            @if (Model.Unregister)
+            @if (Model.Unregister 
+                || Model.IsConfirmed)
             {
                 @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "toDate", @readonly = "readonly" } })
             }

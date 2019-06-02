@@ -18,9 +18,9 @@ namespace Hotel.Tests
         public void DateBetweenTests()
         {
             DateTime from = new DateTime(2019,05,31);
-            
-            var test = _validatorService.DateBetweenDays(from, DateTime.Now);
-            Assert.Equal(0, test);
+            DateTime to = new DateTime(2019, 06, 02);
+
+            Assert.Equal(2, _validatorService.DateBetweenDays(from, to));
 
         }
     }
