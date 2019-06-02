@@ -23,16 +23,9 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public decimal CalculatePriceToPay(int days, decimal dayCost)
         {
-            if (days == 0)
+            if (days > 0)
             {
-                return dayCost;
-            }
-            else
-            {
-                if (days > 0)
-                {
-                    return days * dayCost;
-                }
+                return days * dayCost;
             }
             return 0;
         }
@@ -77,7 +70,6 @@ namespace Hotel.DAO.HotelServiceImpl
                 && !reservation.Unregister)
             {
                 room.Status.Available = "Nie";
-                reservation.FromDate = DateTime.Now;
                 reservation.EmailSend = true;
             }
             else
@@ -92,7 +84,7 @@ namespace Hotel.DAO.HotelServiceImpl
                 {
                     reservation.EmailSend = false;
                 }
-               
+
             }
 
             await _roomService.UpdateRoomAsync(room, reservation.Rooms.ID);
