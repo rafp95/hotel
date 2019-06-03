@@ -25,7 +25,7 @@
         <div class="col-md-12">
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label" })
             @if (Model.Unregister
-                || Model.IsConfirmed)
+               || Model.IsConfirmed)
             {
                 @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "fromDate", @readonly = "readonly" } })
             }
@@ -40,14 +40,14 @@
     <div class="form-group">
         <div class="col-md-12">
             @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label" })
-            @if (Model.Unregister 
-                || Model.IsConfirmed)
+            @if (Model.Unregister
+               || Model.IsConfirmed)
             {
                 @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "toDate", @readonly = "readonly" } })
             }
             else
             {
-                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "toDate"} })
+                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = Model.IsConfirmed ? "" : "toDate" } })
             }
             @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
         </div>
@@ -97,11 +97,13 @@
     }
 
     @if (!Model.IsConfirmed
-      || !Model.Unregister)
+     || !Model.Unregister)
     {
         <div class="form-group">
             <div class="col-md-12">
-                <input type="submit" value="Zapisz" class="btn btn-block btn-default" />
+                <button type="submit" class="btn btn-block btn-warning">
+                    Zapisz
+                </button>
             </div>
         </div>
     }
