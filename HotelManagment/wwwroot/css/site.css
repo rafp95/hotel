@@ -187,3 +187,9 @@ th, td {
 }
 
 /*--/--*/
+
+/*select selte*/
+select, select.form-control{
+    padding: 0.5rem 0.5rem;
+}
+/*---/---*/

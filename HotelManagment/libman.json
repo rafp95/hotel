@@ -5,6 +5,10 @@
     {
       "library": "jquery-datetimepicker@2.5.20",
       "destination": "wwwroot/lib/jquery-datetimepicker/"
+    },
+    {
+      "library": "bootswatch@4.3.1",
+      "destination": "wwwroot/lib/bootswatch/"
     }
   ]
 }
