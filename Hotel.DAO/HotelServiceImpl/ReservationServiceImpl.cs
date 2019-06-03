@@ -23,11 +23,11 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public decimal CalculatePriceToPay(int days, decimal dayCost)
         {
-            if (days > 0)
+            if (days > 1)
             {
                 return days * dayCost;
             }
-            return 0;
+            return dayCost;
         }
 
         public async Task SetUserIsConfirmedByEmailAsync(Reservation reservation, string id)
@@ -71,6 +71,7 @@ namespace Hotel.DAO.HotelServiceImpl
             {
                 room.Status.Available = "Nie";
                 reservation.EmailSend = true;
+                reservation.FromDate = DateTime.Now;
             }
             else
             {
@@ -89,6 +90,16 @@ namespace Hotel.DAO.HotelServiceImpl
 
             await _roomService.UpdateRoomAsync(room, reservation.Rooms.ID);
             return await _reservation.FindOneAndReplaceAsync(_ => _.ID == id, reservation);
+        }
+
+        public async Task UpdateReservationByUser(string userId, Guest guest)
+        {
+            var find = await _reservation.Find(_ => _.GuestID == userId).FirstOrDefaultAsync();
+            if (find != null)
+            {
+                find.Guest = guest;
+                await _reservation.FindOneAndReplaceAsync(_ => _.GuestID == userId, find);
+            }
         }
     }
 }

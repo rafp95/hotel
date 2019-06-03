@@ -40,7 +40,7 @@ namespace Hotel.DAO.HotelServiceImpl
             do
             {
 
-            } while (dateTime.AddSeconds(60) > DateTime.Now);
+            } while (dateTime.AddSeconds(20) > DateTime.Now);
 
             //Task<IEnumerable<Reservation>> reservations = _reservationService.GetReservationsAsync();
             //reservations.Wait();

@@ -158,7 +158,7 @@ namespace HotelManagment.Controllers
                 ViewBag.Room = selectListItems;
                 DateTime now = DateTime.Now;
                 // TODO: Add insert logic here
-                if (_validatorService.DateIsInValid(reservation, now) 
+                if (_validatorService.DateIsInValid(reservation, now)
                     && !reservation.IsConfirmed)
                 {
                     ViewBag.Error = $"Błędne daty";
@@ -181,7 +181,7 @@ namespace HotelManagment.Controllers
                         reservation.Rooms = pom2;
                         if (reservation.Unregister)
                         {
-                            reservation.Price = _reservationService.CalculatePriceToPay(_validatorService.DateBetweenDays(reservation.FromDate, now) + 1, reservation.Rooms.Amount);
+                            reservation.Price = _reservationService.CalculatePriceToPay(_validatorService.DateBetweenDays(reservation.FromDate, now), reservation.Rooms.Amount);
                         }
                         await _reservationService.UpdateReservationAsync(reservation, id);
                         TempData["CRUDinfo"] = "Zaktualizowno pomyślnie";

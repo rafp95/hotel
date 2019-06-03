@@ -11,10 +11,13 @@ namespace Hotel.DAO.HotelServiceImpl
     public class GuestServiceImpl : IGuestService
     {
         private readonly IMongoCollection<Guest> _guest;
+        private readonly IReservationService _reservationService;
 
-        public GuestServiceImpl(IConnectionService<Guest> guest)
+        public GuestServiceImpl(IConnectionService<Guest> guest
+            , IReservationService reservationService)
         {
             this._guest = guest.GetMongoCollection("Hotel.Guest");
+            _reservationService = reservationService;
         }
 
         public async Task AddQuestAsync(Guest guest)
@@ -28,8 +31,8 @@ namespace Hotel.DAO.HotelServiceImpl
         }
 
         public IEnumerable<Guest> FindGuestByName(string criteria)
-        { 
-            return  _guest.Find(_ => _.Name.Contains(criteria) ).ToList();
+        {
+            return _guest.Find(_ => _.Name.Contains(criteria)).ToList();
         }
 
         public async Task<Guest> FindGuestByIdAsync(string id)
@@ -42,9 +45,10 @@ namespace Hotel.DAO.HotelServiceImpl
             return await this._guest.Find(_ => true).ToListAsync();
         }
 
-        public async  Task UpdateQuest(Guest guest, string id)
+        public async Task UpdateQuest(Guest guest, string id)
         {
             await this._guest.FindOneAndReplaceAsync(_ => _.ID == id, guest);
+            await this._reservationService.UpdateReservationByUser(id, guest);
         }
 
         public async Task<Guest> FindGuestByPeselAsync(string pesel)
