@@ -21,61 +21,62 @@
     </div>
 }
 
-
-<div class="table-responsive guest-container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Surname)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Phone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Pesel)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="outer-container">
+    <div class="table-responsive guest-container">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Surname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Pesel)
-                    </td>
-                    <td>
-                        @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
-                        @Html.ActionLink("kas", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Surname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pesel)
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pesel)
+                        </td>
+                        <td>
+                            @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("kas", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
+    </div>
 </div>

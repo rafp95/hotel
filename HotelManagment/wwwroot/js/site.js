@@ -59,6 +59,7 @@ $(function () {
         $('tbody tr').filter(function () {
             console.log($(this).text());
             $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+            $('div.main-loader').fadeIn(30).fadeOut(30);
         });
     });
 

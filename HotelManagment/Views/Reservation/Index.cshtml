@@ -15,92 +15,93 @@
         @TempData["CRUDinfo"]
     </div>
 }
-
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FromDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ToDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GuestID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Room)
-                </th>
-                <th>
-                    @Html.DisplayName("Wyrejestrowany?")
-                </th>
-                <th>
-                    @Html.DisplayName("Do zapłaty")
-                </th>
-                <th>
-                    @Html.DisplayName("Czy przybył")
-                </th>
-                <th>
-                    Akcja
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="outer-container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FromDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ToDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Guest.Name)
-                        @Html.DisplayFor(modelItem => item.Guest.Surname)
-                        @Html.DisplayFor(modelItem => item.Guest.Pesel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rooms.RoomNr)
-                        @Html.DisplayFor(modelItem => item.Rooms.Category)
-                    </td>
-                    <td>
-                        @if (item.Unregister)
-                        {
-                            <span>Tak</span>
-                        }
-                        else
-                        {
-                            <span>Nie</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.Price.HasValue)
-                        {
-                            @item.Price <span> zł</span>
-                        }
-                        else
-                        {
-                            <span>0 zł</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.IsConfirmed)
-                        {
-                            <spa>Tak</spa>
-                        }
-                        else
-                        {
-                            <span>Nie</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
-                        @Html.ActionLink("kas", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FromDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GuestID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Room)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Wyrejestrowany?")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Do zapłaty")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Czy przybył")
+                    </th>
+                    <th>
+                        Akcja
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FromDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ToDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Name)
+                            @Html.DisplayFor(modelItem => item.Guest.Surname)
+                            @Html.DisplayFor(modelItem => item.Guest.Pesel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rooms.RoomNr)
+                            @Html.DisplayFor(modelItem => item.Rooms.Category)
+                        </td>
+                        <td>
+                            @if (item.Unregister)
+                            {
+                                <span>Tak</span>
+                            }
+                            else
+                            {
+                                <span>Nie</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Price.HasValue)
+                            {
+                                @item.Price <span> zł</span>
+                            }
+                            else
+                            {
+                                <span>0 zł</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsConfirmed)
+                            {
+                                <spa>Tak</spa>
+                            }
+                            else
+                            {
+                                <span>Nie</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("kas", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
