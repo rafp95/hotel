@@ -62,7 +62,7 @@ namespace HotelManagment.Controllers
                 {
                     Text =
                     $"Opis = {item.Description} | " +
-                    $"Cena = {item.Amount} | " +
+                    $"Cena = {item.Amount} zł | " +
                     $"Kategoria = {item.Category.Category} | " +
                     $"Ilość osób = {item.Capacity}",
                     Value = item.ID
