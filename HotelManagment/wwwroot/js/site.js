@@ -61,6 +61,7 @@ $(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
             $('div.main-loader').fadeIn(30).fadeOut(30);
         });
+        return false;
     });
 
     $("div.alert>a.close").off('click').on('click', function () {

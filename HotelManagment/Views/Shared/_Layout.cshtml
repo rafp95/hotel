@@ -15,11 +15,11 @@
               crossorigin="anonymous"
               integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.css">
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/MyCss.min.css" rel="stylesheet" />
-    <link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
     @if (IsSectionDefined("MyCustomStyle"))
     {
         @RenderSection("MyCustomStyle", required: false)
@@ -28,7 +28,9 @@
 <body>
 
     <!--main page loader-->
-    <div class="main-loader"></div>
+    <div class="main-loader">
+        <i class="fa fa-spin fa-spinner" aria-hidden="true"></i>
+    </div>
     <!--end main page loader-->
 
     <header>
