@@ -6,6 +6,7 @@
 
 <div class="search-container">
     <input type="text" id="searchInput" class="form-control" placeholder="Wyszukaj pokój" />
+    <i class="fa fa-times remove-text-icon" aria-hidden="true"></i>
 </div>
 
 <p>
@@ -14,10 +15,10 @@
 
 @if (TempData["CRUDinfo"] != null)
 {
-<div class="alert alert-success alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    @TempData["CRUDinfo"]
-</div>
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @TempData["CRUDinfo"]
+    </div>
 }
 
 <div class="outer-container">
@@ -48,32 +49,32 @@
             </thead>
             <tbody>
                 @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomNr)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Amount) zł
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Capacity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status.Available)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.Category)
-                    </td>
-                    <td>
-                        @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
-                        @Html.ActionLink("kas", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
-                    </td>
-                </tr>
-            }
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomNr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount) zł
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Capacity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status.Available)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.Category)
+                        </td>
+                        <td>
+                            @Html.ActionLink("edy", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("kas", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

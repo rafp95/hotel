@@ -54,15 +54,7 @@ $(function () {
     $('div.main-loader').fadeOut('slow');
     $("alert").fadeIn();
 
-    $('#searchInput').on('keyup', function () {
-        let val = $(this).val().toLowerCase();
-        $('tbody tr').filter(function () {
-            console.log($(this).text());
-            $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
-            $('div.main-loader').fadeIn(30).fadeOut(30);
-        });
-        return false;
-    });
+    tableFilter();
 
     $("div.alert>a.close").off('click').on('click', function () {
         $(this).parent().fadeOut('slow');
@@ -70,3 +62,42 @@ $(function () {
     });
 
 });
+
+function tableFilter() {
+    $('#searchInput').on('keyup', function() {
+        let val = $(this).val().toLowerCase();
+        clearInputSearch(val);
+        filter(val,'tbody tr');
+        return false;
+    });
+
+    function filter(val,nameElement) {
+        $(nameElement).filter(function() {
+            console.log($(this).text());
+            let isElement = $(this).text().toLowerCase().indexOf(val) > -1;
+            if (!isElement) {
+                $(this).fadeOut();
+            }
+            else {
+                $(this).fadeIn();
+            }
+            $('div.main-loader').fadeIn(30).fadeOut(30);
+        });
+    }
+}
+
+function clearInputSearch(val) {
+    let remove = $("div>i.fa");
+    if (val.length > 0) {
+        remove.css({ 'display': 'flex' });
+        remove.off('click').on('click', function (e) {
+            e.preventDefault();
+            $('#searchInput').val('');
+            remove.css({ 'display': 'none' });
+            $('tbody tr').fadeIn();
+        });
+    }
+    else {
+        remove.css({ 'display': 'none' });
+    }
+}
