@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<Hotel.DAO.PublicModel.Reservation>
 
-<div class="search-container">
-    <input type="text" id="searchInput" class="form-control" placeholder="Wyszukaj rezerwacje" />
-    <i class="fa fa-times remove-text-icon" aria-hidden="true"></i>
-</div>
+@{await Html.RenderPartialAsync("_SearchForm", "Wyszukaj rezerwację"); }
 
 <p>
     <a asp-action="Create">Utwórz rezerwacje</a>
