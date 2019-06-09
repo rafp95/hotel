@@ -32,7 +32,8 @@ namespace Hotel.DAO.HotelServiceImpl
 
         public IEnumerable<Guest> FindGuestByName(string criteria)
         {
-            return _guest.Find(_ => _.Name.Contains(criteria)).ToList();
+            criteria = criteria.ToLower();
+            return _guest.Find(_ => _.Name.ToLower().Contains(criteria)).ToList();
         }
 
         public async Task<Guest> FindGuestByIdAsync(string id)
