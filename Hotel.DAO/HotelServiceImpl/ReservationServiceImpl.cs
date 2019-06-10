@@ -101,5 +101,20 @@ namespace Hotel.DAO.HotelServiceImpl
                 await _reservation.FindOneAndReplaceAsync(_ => _.GuestID == userId, find);
             }
         }
+
+        public async Task UpdateRoomInReservation(string roomId, Room room)
+        {
+           
+            if(await _reservation.FindSync(_ => _.Room == roomId).AnyAsync())
+            {
+                var reservation = await _reservation.Find(_ => _.Rooms.ID == roomId).ToListAsync();
+                foreach (var item in reservation)
+                {
+                    item.Rooms = room;
+                    await _reservation.FindOneAndReplaceAsync(_ => _.ID == item.ID,item);
+                }
+            }
+            
+        }
     }
 }

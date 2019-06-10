@@ -15,15 +15,18 @@ namespace HotelManagment.Controllers
         private readonly IRoomService _romService;
         private readonly IRoomStatusService _roomStatusService;
         private readonly IRoomCateggoryService _roomCateggory;
+        private readonly IReservationService _reservationService; 
 
         public RoomController(IRoomService romService
             , IRoomStatusService roomStatusService
             , IWorkerSendEmailService workerSendEmail
-            , IRoomCateggoryService roomCateggory) : base(workerSendEmail)
+            , IRoomCateggoryService roomCateggory
+            , IReservationService reservationService) : base(workerSendEmail)
         {
             _romService = romService;
             _roomStatusService = roomStatusService;
             _roomCateggory = roomCateggory;
+            _reservationService = reservationService;
 
         }
 
@@ -95,6 +98,7 @@ namespace HotelManagment.Controllers
                 // TODO: Add update logic here
                 TempData["CRUDinfo"] = "Zaktualizowano pomyślnie";
                 await _romService.UpdateRoomAsync(room, id);
+                await _reservationService.UpdateRoomInReservation(room.ID, room);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -17,6 +17,7 @@ namespace Hotel.DAO.HotelService
         Task ReservationDelete(string id);
         Task SetUserIsConfirmedByEmailAsync(Reservation reservation, string id);
         Task UpdateReservationByUser(string guestId, Guest guest);
+        Task UpdateRoomInReservation(string roomId, Room room);
     }
 
 }
