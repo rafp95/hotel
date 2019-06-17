@@ -45,7 +45,7 @@ function tableOnSmallScreen() {
     let tbody = $('table.data-details>tbody>tr');
 
     if (thead.length > 0 && tbody.length > 0) {
-        $('div.main-loader').fadeIn();
+        $('div.main-loader').fadeIn('slow');
         $('.table').hide().fadeIn(() => {
             $('div.main-loader').fadeOut('slow');
         });
