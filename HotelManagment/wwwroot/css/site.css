@@ -186,3 +186,16 @@ select, select.form-control {
     padding: 0.5rem 0.5rem;
 }
 /*---/---*/
+
+/*to top page*/
+#toTopPage{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-size: 3rem;
+    display: none;
+    z-index: 99999;
+    cursor: pointer;
+    opacity: .6;
+}
+/*---/----*/

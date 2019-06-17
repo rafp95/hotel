@@ -2,7 +2,14 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-$(function () {
+$(function ($) {
+    /*to top*/
+
+    let top = $("div#toTopPage");
+    toTopPage($, top);
+
+
+    /*------*/
     /*fade between page*/
     (function ($) {
         $("div.container").hide().fadeIn('slow');
@@ -18,6 +25,38 @@ $(function () {
     tableFilter();
 
 });
+
+function toTopPage($, top) {
+    $(window).on('scroll', function () {
+        let elem = $(this);
+        console.log(elem.height());
+        if ($(this).scrollTop() >= 50) {
+            top.fadeIn();
+        }
+        else {
+            top.fadeOut();
+        }
+        return false;
+    });
+    top.off('click').on('click', function () {
+        $('html,body').animate({
+            scrollTop: 0
+        }, 1500);
+        return false;
+    });
+    $('div#toTopPage>i').mouseover(function () {
+        $(this).animate({
+            opacity: 0.5
+        }, 1500);
+        return false;
+    });
+    $('div#toTopPage>i').mouseleave(function () {
+        $(this).animate({
+            opacity: 0.6
+        }, 1500);
+        return false;
+    });
+}
 
 function mainSettings() {
 
@@ -35,7 +74,7 @@ function dateTimePickerSettings() {
     $('#fromDate,#toDate')
         .datetimepicker({
             format: 'd.m.y H:i',
-            minDate: new Date() 
+            minDate: new Date()
         });
     $.datetimepicker.setLocale('pl');
 }
