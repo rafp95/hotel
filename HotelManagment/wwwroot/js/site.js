@@ -14,7 +14,7 @@ $(function () {
         tableOnSmallScreen();
     });
     dateTimePickerSettings();
-    mainSettings($);
+    mainSettings();
     tableFilter();
 
 });
@@ -35,6 +35,7 @@ function dateTimePickerSettings() {
     $('#fromDate,#toDate')
         .datetimepicker({
             format: 'd.m.y H:i',
+            minDate: new Date() 
         });
     $.datetimepicker.setLocale('pl');
 }
