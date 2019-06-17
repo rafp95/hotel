@@ -8,7 +8,6 @@ $(function ($) {
     let top = $("div#toTopPage");
     toTopPage($, top);
 
-
     /*------*/
     /*fade between page*/
     (function ($) {
@@ -26,15 +25,13 @@ $(function ($) {
 
 });
 
-function toTopPage($, top) {
+function toTopPage(window, top) {
     $(window).on('scroll', function () {
-        let elem = $(this);
-        console.log(elem.height());
         if ($(this).scrollTop() >= 50) {
-            top.fadeIn();
+            top.fadeIn(100);
         }
         else {
-            top.fadeOut();
+            top.fadeOut('fast');
         }
         return false;
     });
@@ -49,11 +46,10 @@ function toTopPage($, top) {
             opacity: 0.5
         }, 1500);
         return false;
-    });
-    $('div#toTopPage>i').mouseleave(function () {
+    }).mouseleave(function () {
         $(this).animate({
             opacity: 0.6
-        }, 1500);
+        }, 300);
         return false;
     });
 }
@@ -104,7 +100,6 @@ function showHideDetailsTd(tbody, thead) {
     for (let i = 0; i < tbody.length; i++) {
         let td = tbody.eq(i).children('td');
         for (let j = 0; j < td.length; j++) {
-            this.console.log(td.length);
             let pom = td.eq(j).find('span');
             if (!pom.hasClass('content') && $(window).width() <= 1200) {
                 td.eq(j).prepend(`
@@ -130,7 +125,6 @@ function tableFilter() {
 
     function filter(val, nameElement) {
         $(nameElement).filter(function () {
-            console.log($(this).text());
             let isElement = $(this).text().toLowerCase().indexOf(val) > -1;
             if (!isElement) {
                 $(this).fadeOut();
