@@ -41,8 +41,8 @@ function dateTimePickerSettings() {
 
 function tableOnSmallScreen() {
 
-    let thead = $('thead>tr>th');
-    let tbody = $('tbody>tr');
+    let thead = $('table.data-details>thead>tr>th');
+    let tbody = $('table.data-details>tbody>tr');
 
     if (thead.length > 0 && tbody.length > 0) {
         $('div.main-loader').fadeIn();
