@@ -8,7 +8,7 @@ a.navbar-brand {
 }
 
 nav > div.container, .navbar-collapse {
-    transition: .5s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 /* Sticky footer styles
@@ -50,11 +50,11 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    -moz-animation: fade 1s; /* Firefox */
-    -webkit-animation: fade 1s; /* Safari and Chrome */
-    -o-animation: fade 1s;
-    animation: fade 1s; /* Opera */
-    transition: .5s all ease-in-out;
+    -moz-animation: fade 2s; /* Firefox */
+    -webkit-animation: fade 2s; /* Safari and Chrome */
+    -o-animation: fade 2s;
+    animation: fade 2s; /* Opera */
+    transition: all .1s ease;
     overflow-x: hidden;
 }
 
@@ -119,10 +119,9 @@ div.main-loader {
 /*custom table style*/
 .table {
     color: black;
-   
 }
 
-@media (min-width: 1201px){
+@media (min-width: 1201px) {
     .table {
         min-width: 1100px;
     }
@@ -172,7 +171,7 @@ th, td {
         overflow: hidden !important;
     }
 
-    thead{
+    thead {
         display: none;
     }
 
