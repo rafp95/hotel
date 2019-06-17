@@ -3,76 +3,82 @@
 
 // Write your JavaScript code.
 $(function () {
+    tableOnSmallScreen();
+    $(window).resize(function () {
+        tableOnSmallScreen();
+    });
+    dateTimePickerSettings();
+    mainSettings($);
+    tableFilter();
 
-    //$("#fromDate").shieldDateTimePicker({
-    //    openOnFocus: false,
-    //    showButton: true,
-    //    editable: true,
-    //    messages: { calendarIconTooltip: "open" },
-    //    value: new Date(1900, 1, 1, 12, 0)
-    //});
+});
 
-    //let dateFormat = "dd.mm.yy",
-    //    from = $("#fromDate")
-    //        .datepicker({
-    //            defaultDate: "+1w",
-    //            changeMonth: true,
-    //            numberOfMonths: 2,
-    //            defaultDate: new Date(),
-    //            dateFormat: "dd.mm.yy",
-    //        })
-    //        .on("change", function () {
-    //            to.datepicker("option", "minDate", getDate(this));
-    //        }),
-    //    to = $("#toDate").datepicker({
-    //        defaultDate: "+1w",
-    //        changeMonth: true,
-    //        numberOfMonths: 2,
-    //        dateFormat: "dd.mm.yy",
-    //        defaultDate: new Date(),
-    //    })
-    //        .on("change", function () {
-    //            from.datepicker("option", "maxDate", getDate(this));
-    //        });
+function mainSettings($) {
+    /*fade between page*/
+    (function ($) {
+        $("div.container").hide().fadeIn('slow');
+    })(jQuery);
+    /*----*/
 
-    //function getDate(element) {
-    //    var date;
-    //    try {
-    //        date = $.datepicker.parseDate(dateFormat, element.value);
-    //    } catch (error) {
-    //        date = null;
-    //    }
+    /*loader*/
+    $('div.main-loader').fadeOut('slow');
+    $("alert").fadeIn();
+    $("div.alert>a.close").off('click').on('click', function () {
+        $(this).parent().fadeOut('slow');
+        return false;
+    });
+    /*---*/
+}
 
-    //    return date;
-    //}
+function dateTimePickerSettings() {
     $('#fromDate,#toDate')
         .datetimepicker({
             format: 'd.m.y H:i',
         });
     $.datetimepicker.setLocale('pl');
+}
 
-    $('div.main-loader').fadeOut('slow');
-    $("alert").fadeIn();
+function tableOnSmallScreen() {
+    $('.table').hide().fadeIn('slow');
+    let thead = $('thead>tr>th');
+    let tbody = $('tbody>tr');
+    if ($(this).width() <= 1200) {
+        showHideDetailsTd(tbody, thead);
+    } else {
+        showHideDetailsTd(tbody, thead);
+    }
 
-    tableFilter();
-
-    $("div.alert>a.close").off('click').on('click', function () {
-        $(this).parent().fadeOut('slow');
-        return false;
-    });
-
-});
+    function showHideDetailsTd(tbody, thead) {
+        for (let i = 0; i < tbody.length; i++) {
+            let td = tbody.eq(i).children('td');
+            for (let j = 0; j < td.length; j++) {
+                this.console.log(td.length);
+                let pom = td.eq(j).find('span');
+                if (!pom.hasClass('content') && $(window).width() <= 1200) {
+                    td.eq(j).prepend(`
+                    <span class="content">
+                      <b> ${thead.eq(j).text().length > 0 ? thead.eq(j).text() + ':' : ''}  </b>
+                    </span>`);
+                } else {
+                    if (pom.hasClass('content') && $(window).width() > 1200) {
+                        pom.remove('span.content');
+                    }
+                }
+            }
+        }
+    }
+}
 
 function tableFilter() {
-    $('#searchInput').on('keyup', function() {
+    $('#searchInput').on('keyup', function () {
         let val = $(this).val().toLowerCase();
         clearInputSearch(val);
-        filter(val,'tbody tr');
+        filter(val, 'tbody tr');
         return false;
     });
 
-    function filter(val,nameElement) {
-        $(nameElement).filter(function() {
+    function filter(val, nameElement) {
+        $(nameElement).filter(function () {
             console.log($(this).text());
             let isElement = $(this).text().toLowerCase().indexOf(val) > -1;
             if (!isElement) {

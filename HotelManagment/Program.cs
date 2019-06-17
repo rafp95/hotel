@@ -9,6 +9,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using NLog.Web;
 
 
@@ -43,7 +44,10 @@ namespace HotelManagment
                     .ConfigureLogging(log =>
                     {
                         log.ClearProviders();
+                        log.AddConsole();
                         log.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                        log.AddDebug();
+                        log.AddNLog();
                     })
                 .UseNLog()
                 .Build();
